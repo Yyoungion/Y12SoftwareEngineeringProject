@@ -175,4 +175,84 @@ Students and young people today experience high levels of stress and anxiety fro
     - Consistent Behavior: Game mechanics must behave identically every time
     - Recovery: If the game encounters an error, it must either recover automatically or provide clear instructions to the player on how to resolve the issue
     - Reproducibility: Game behavior must be predictable and reproducible
+&nbsp; \
+&nbsp;
+### 1.6 Constraints
+--- 
+#### **Identify limitations affecting the project**
+1. Time Constraints
+    - Assessment Deadline: The project must be completed by Week 8 of Term 2, limiting the total development time available
+    - Competing Assessments: Other assignments, exams and projects will occur at the same time, reducing the time available for this project
+    - Development Restrictions: Limited time means features, mostly the ones listed in Functional Requirements, must be prioritized
+    - Testing Time: Insufficient time for testing all the features & aspects of the game may mean in some bugs and balance issues might occur with the final project
+    - Learning Programming: As I am not extremely proficient in C#, time needs to be spend leaning the program, limiting my time developing the project itself.
 
+2. Technical Knowledge Constraints
+    - Unity Experience: Very limited experience in developing complex Unity games means I will have to learn how to use most complex systems while developing this project
+    - Optimization: Lack of knowledge about performance optimization, especially in Unity. This may  mean the final project is not fully optimised, resulting in some inefficient code.
+    - Animation: Limited knowledge of Unity's animation system will mean character animations will only be basic sprite swapping
+
+3. Hardware / Software Constraints
+    - Computer Specs: Limited to just my personal PC while developing the game. This means that the end user's experience may differ from mine as I have a relatively high end PC. Users with lower end hardware may experience stutters or slow performance not detected by my personal testing.
+        - Testing on lower end hardware is needed to satisfy part of my problem I want to solve.
+    - Limited to free software such as Unity and VS Code.
+    - Limited to free assets for graphics and sounds
+&nbsp; \
+&nbsp;
+### 1.7 Requirements Analysis and Prioritisation
+--- 
+#### **Analyse the functional and non-functional requirements**
+The project prioritizes functionality that allow the game to be playable. Systems such as movement, health, items, inventory and UI form the very basics of a survival game. Performance and usability were prioritized within the non-functional requirements. This is because a smooth and intuitive gameplay is essential for stress relief. Lag and confusing controls would create frustration rather than reduce it. Next, requirements like the hunger, enemies, combat, and crafting add depth but can be simplified or cut if time runs short, while low priority features like save systems and a extensive storyline are nice additions to have that don't impact the core experience.
+
+Due to project constraints, several compromises will be made in the final game. Limited time means the game will focus on a few core mechanics done that will be well made rather than many half finished and sloppy features. This means the game will have features 2D graphics, basic enemy behavior, and a smaller game world, but instead, everything will works properly and smoothly. With only beginner level Unity and C# skills, the game will use simple techniques mostly found in tutorials rather than complex custom systems. This means things like enemies will have simple mechanics instead of an advanced algorithm, and the game will rely on Unity's built-in tools rather than complicated code. Money for assets, graphics and sounds is nonexistant, meaning most of them will come from free online libraries. This means the visual and audio will be extremely basic but functional. These constraints means that the final game will be simpler and less polished than commercial games, but will result in a complete, playable and mostly bugless game.
+
+
+<div style="padding-bottom: 40px;"></div>
+
+
+## **Part 2 - Research and Planning**
+### 2.1 Development Methodology
+--- 
+#### **Describe the development approach used (e.g. Agile, Waterfall, WAgile).**
+#### **Justify the suitability of this methodology.**
+This project will follow an Agile development approach with short 2-week sprint cycles. The development will be divided into sprints, with each sprint focusing on specific features: Sprint 1 covers player movement and basic UI, Sprint 2 implements health and inventory systems, Sprint 3 adds enemies and combat, Sprint 4 focuses on polish and additional features like hunger or crafting if time permits, and Sprint 5 is dedicated to final testing and documentation. After each sprint, the game will be playtested to identify bugs and receive feedback.
+
+Agile is suitable for this project due to its flexibility in handling smaller projects, time constraints, and its ability to receive feedback. As a small solo project with many different systems (health, inventory, enemies) and a beginner developer learning Unity, Agile allows building the game piece-by-piece rather than planning everything upfront. This means if a feature like crafting proves too complex, it can be unprioritized without derailing the entire project. Most importantly, Agile's cyclical nature allows for regular testing, allowing early detection of problems when they're still easy to fix.
+&nbsp; \
+&nbsp;
+### 2.2 Tools and Technologies
+--- 
+#### **Justify the selection of software applications, engines, developer tools, programming languages, IDEs, frameworks, libraries and/or hardware components.**
+#### **Explain how these tools supported efficient and effective development.**
+The core development tools selected were Unity as the game engine, C# as the programming language, and Visual Studio Code as the IDE. Unity was chosen because it's completely free for students, has extensive beginner-friendly tutorials and functions, and is specifically well-suited for 2D top-down games with built-in physics engines and sprite rendering systems. C# was chosen as it is Unity's scripting language. Visual Studio Code was selected because it's free, provides excellent Unity integration and error detection. Tools such as GitHub [text](<../../../../../Downloads/Gantt Chart - Software Engineering - Year 12 Project - Sheet1.pdf>)were used for version control. It allowed forbackups and commit history documentation of the development process. Free graphics tools and asset libraries such as itch.io were used to get premade sprite packs and UI elements, saving time and also saving me from drawing horrible art.
+&nbsp; \
+&nbsp;
+### 2.3 Gantt Chart / Timeline
+--- 
+![Gantt Chart](Photos/Gantt%20Chart%20-%20Software%20Engineering%20-%20Year%2012%20Project.png)
+&nbsp; \
+&nbsp;
+### 2.4 Communication Plan
+--- 
+#### **Explain how client or peer feedback was obtained and incorporated.**
+TO BE CONTINUED (HAVENT COMPLETED YET)
+&nbsp; \
+&nbsp;
+### 2.5 Resource Allocation Justification
+--- 
+#### **Justify the resource allocation for the project**
+
+
+<div style="padding-bottom: 40px;"></div>
+
+
+## **Part 3 - System Design**
+&nbsp; \
+&nbsp;
+### 3.1 Context Diagram
+
+### 3.2 Data Flow Diagram
+---
+#### **Level 0 DFD (Game Runtime and Save/Load)**
+
+![Data Flow Diagram - Level 0](Photos/DataFlowDiagram-Level0.png)
