@@ -250,9 +250,42 @@ TO BE CONTINUED (HAVENT COMPLETED YET)
 &nbsp; \
 &nbsp;
 ### 3.1 Context Diagram
-
+![Data Flow Diagram - Level 0](Photos/DataFlowDiagram-Level0.png)
+&nbsp; \
+&nbsp;
 ### 3.2 Data Flow Diagram
 ---
-#### **Level 0 DFD (Game Runtime and Save/Load)**
+![Data Flow Diagram - Level 0](Photos/DataFlowDiagram-Level1.png)
 
-![Data Flow Diagram - Level 0](Photos/DataFlowDiagram-Level0.png)
+P.S Ignore the File System. I forgot to delete it.
+&nbsp; \
+&nbsp;
+### 3.3 Structure Chart
+![Structure Chart](Photos/StructureChart.png)
+&nbsp; \
+&nbsp;
+### 3.4 IPO Chart
+|Input|Process|Output|
+|-----|-----|-----|
+|Keyboard (WASD)| - Detects key presses <br> - Calculates movement direction and movement speed <br> - Check for collisions <br> - Updates player position.| - New player position|
+|Damage Amount (From Enemy) <br> Heal amount (From Consumable) | - Subtract damage from current health <br> - Add heal amount to current health <br> -Check if health ≤ 0| - Update current health value <br> - Death flag (if health = 0) <br> - Updated health bar <br>|
+|Item ID <br> Item Quantity <br> Player Action (Collect/Use/Drop)| - Check inventory capacity <br> - Add item to inventory <br> - Remove item from inventory <br> - Apply item effect <br> - Update inventory count| - Updated inventory contents <br> - Inventory full message <br> - Updated inventory UI|
+|Player position <br> Enemy position| - Calculate distance from player <br> - Calculate path to player <br> - Update enemy position <br> - Check attack range| - New enemy position <br> - Attack (if in range) <br> - Updated enemy state|
+|Attack Stats <br> Defence Stats <br>| - Check if target is in attack range <br> - Calculate damage <br> - Apply damage to target <br> | - Damage dealt to target <br> - Updated target health <br>|
+|Delta time <br> Food consumed <br> Current health | - Decrease hunger over time <br> - Increase hunger value when fod consumed <br> - Apply starvation debuffs when hunger low | - Updated hunger value <br> - Hunger bar UI updated <br> - Health and movement penalty when hunger = 0|
+&nbsp; \
+&nbsp;
+### 3.5 Data Dictionary
+|Name|Type|Description
+|---|---|---|
+|playerID|Integer|Helps identifies each player's character|
+|playerName|String|Name of character|
+|playerPosition|Vector2|Player's current x and y coordinates|
+|playerHealth|Float|Current health value of the player|
+|maxHealth|Float|Maximum health value the player can have|
+|playerHunger|Float|Current hunger value of the player|
+|maxHunger|Float|Maximum hunger value the player can have|
+|movementSpeed|Float|Speed value used for player movement|
+|isAlive|Boolean|Indicates whether the player is alive or dead|
+|attackDamage|Float|Amount of damage dealt by player attacks|
+|defence|Float|Damage reduction stat used during combat calculations|
