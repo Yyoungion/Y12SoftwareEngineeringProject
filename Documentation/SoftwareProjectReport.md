@@ -289,3 +289,7 @@ P.S Ignore the File System. I forgot to delete it.
 |isAlive|Boolean|Indicates whether the player is alive or dead|
 |attackDamage|Float|Amount of damage dealt by player attacks|
 |defence|Float|Damage reduction stat used during combat calculations|
+&nbsp; \
+&nbsp;
+### 3.6 UML Class Diagram
+![UML Diagram](Photos/UMLDiagram.png)
