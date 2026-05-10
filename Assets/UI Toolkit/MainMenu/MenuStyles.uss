@@ -1,0 +1,70 @@
+/* Button hover effect */
+.button:hover {
+    background-color: rgb(100, 230, 150);
+    scale: 1.05;
+    transition-duration: 0.2s;
+}
+
+/* Button pressed effect */
+.button:active {
+    background-color: rgb(30, 150, 70);
+    scale: 0.95;
+}
+
+/* Title style */
+.title {
+    font-size: 72px;
+    color: white;
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Container background */
+.container {
+    background-image: url('project://database/Assets/Sprites/UI/MenuBackground.png');
+    background-color: rgb(20, 40, 80);
+}
+
+/* Custom button style */
+.play-button {
+    background-color: rgb(50, 200, 100);
+    border-radius: 10px;
+    border-width: 3px;
+    border-color: rgb(30, 150, 70);
+    width: 300px;
+    height: 80px;
+}
+
+.options-button {
+    background-color: rgb(80, 120, 200);
+    border-radius: 10px;
+    border-width: 3px;
+    border-color: rgb(50, 80, 150);
+    width: 300px;
+    height: 80px;
+}
+
+/* Smooth transitions */
+Button {
+    transition-duration: 0.3s;
+    transition-property: background-color, scale;
+}
+
+Button:hover {
+    scale: 1.1;
+    background-color: rgb(100, 255, 150);
+}
+
+/* Pulsing title */
+@keyframes pulse {
+    from { scale: 1; }
+    to { scale: 1.05; }
+}
+
+.title {
+    animation-name: pulse;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
