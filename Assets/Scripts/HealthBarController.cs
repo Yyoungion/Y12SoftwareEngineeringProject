@@ -41,26 +41,25 @@ public class HealthBarController : MonoBehaviour
         // Calculate health percentage
         float healthPercent = playerHealth.health / playerHealth.maxHealth;
         
-        // Update fill width (0% to 100%)
+        // Update fill width
         healthBarFill.style.width = Length.Percent(healthPercent * 100);
         
-        // Update text
-        healthLabel.text = $"Health: {Mathf.Ceil(playerHealth.health)}/{playerHealth.maxHealth}";
+        // Update text with fraction - CHANGE THIS LINE
+        int currentHealth = Mathf.CeilToInt(playerHealth.health);
+        int maxHealth = Mathf.CeilToInt(playerHealth.maxHealth);
+        healthLabel.text = $"Health: {currentHealth}/{maxHealth}";
         
         // Change color based on health
         if (healthPercent > 0.5f)
         {
-            // Green when healthy
             healthBarFill.style.backgroundColor = new Color(0.2f, 0.8f, 0.2f);
         }
         else if (healthPercent > 0.25f)
         {
-            // Yellow when medium
             healthBarFill.style.backgroundColor = new Color(0.9f, 0.9f, 0.2f);
         }
         else
         {
-            // Red when low
             healthBarFill.style.backgroundColor = new Color(0.9f, 0.2f, 0.2f);
         }
     }

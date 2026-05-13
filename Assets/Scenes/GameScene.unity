@@ -84180,6 +84180,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1356988197}
     m_Modifications:
+    - target: {fileID: 163821422396400022, guid: 3a14a009de1b3964eacb43e462e595b0, type: 3}
+      propertyPath: attackDamage
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 3528304491443739896, guid: 3a14a009de1b3964eacb43e462e595b0, type: 3}
       propertyPath: m_Name
       value: Slime
