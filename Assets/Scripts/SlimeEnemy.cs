@@ -50,9 +50,9 @@ public class SlimeEnemy : MonoBehaviour
             }
         }
         
-        rb.bodyType = RigidbodyType2D.Kinematic;
-        rb.gravityScale = 0;
-        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        //rb.bodyType = RigidbodyType2D.Kinematic;
+        //rb.gravityScale = 0;
+        //rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         
         // Initialize animator
         animator.SetBool("IsAttacking", false);
@@ -173,11 +173,21 @@ public class SlimeEnemy : MonoBehaviour
         // CRITICAL: Set IsAttacking to false so we can return to Idle
         animator.SetBool("IsAttacking", false);
         
-        float distanceToPlayer = Vector2.Distance(transform.position, player.position);
-        if (distanceToPlayer <= 2f)
+    float distanceToPlayer = Vector2.Distance(transform.position, player.position);
+    if (distanceToPlayer <= 2f)
+    {
+        Vector2 direction = (player.position - transform.position).normalized;
+        
+        // Exclude the slime's own layer and tilemap
+        LayerMask mask = LayerMask.GetMask("Player", "Wall"); // add whatever layers matter
+        
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, distanceToPlayer, mask);
+
+        if (hit.collider != null && hit.collider.transform == player)
         {
             DamagePlayer();
         }
+    }
         
         UpdateAnimator(lastDirection, 0f);
     }

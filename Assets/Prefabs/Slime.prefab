@@ -111,7 +111,7 @@ Rigidbody2D:
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 81b02a5111b0442bbbc3dd83ba019fe2, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -207,7 +207,7 @@ MonoBehaviour:
   attackDamage: 5
   walkSpeed: 1.5
   detectionRange: 50
-  stopDistance: 0
+  stopDistance: 5
   attackRange: 2
   jumpSpeed: 5
   jumpDuration: 0.5
