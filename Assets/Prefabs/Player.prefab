@@ -12,10 +12,7 @@ GameObject:
   - component: {fileID: 8096525865637796902}
   - component: {fileID: 2843110517971634604}
   - component: {fileID: 8481036158173919375}
-  - component: {fileID: 1065395722964602527}
   - component: {fileID: 927604451944834305}
-  - component: {fileID: 6696767528318086626}
-  - component: {fileID: 8390420528259528358}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -146,30 +143,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &1065395722964602527
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6238772261535575986}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a2661f2020e0e04fa54e9e716331b50, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  moveSpeed: 5
-  attackDamage: 25
-  attackRange: 1.5
-  attackCooldown: 0.5
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  health: 100
-  maxHealth: 100
-  damageColor: {r: 1, g: 0, b: 0, a: 1}
-  attackHitbox: {fileID: 0}
-  animator: {fileID: 0}
 --- !u!61 &927604451944834305
 BoxCollider2D:
   m_ObjectHideFlags: 0

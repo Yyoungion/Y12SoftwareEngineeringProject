@@ -18,6 +18,10 @@ public class SlimeEnemy : MonoBehaviour
     public float jumpDuration = 0.4f;
     public float attackCooldown = 2.5f;
     
+    [Header("Drops")]
+    public int currencyDropAmount = 5;
+    public int xpDropAmount = 10;
+
     [Header("References")]
     public Transform player;
     public Animator animator;
@@ -252,18 +256,28 @@ public class SlimeEnemy : MonoBehaviour
     {
         Debug.Log("Slime died!");
         
+        // Drop currency and XP
+        if (CurrencyManager.Instance != null)
+        {
+            CurrencyManager.Instance.AddCurrency(currencyDropAmount);
+            CurrencyManager.Instance.AddXP(xpDropAmount);
+        }
+        
+        // Stop all movement
         isAttacking = false;
         isWalking = false;
         rb.linearVelocity = Vector2.zero;
         
-        animator.SetBool("IsAttacking", false);
-        
+        // Play death animation
         if (animator != null)
         {
             animator.SetTrigger("Die");
         }
         
+        // Disable this script
         this.enabled = false;
+        
+        // Destroy after delay
         Destroy(gameObject, 1f);
     }
     

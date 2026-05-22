@@ -384,6 +384,55 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &720667201
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 720667203}
+  - component: {fileID: 720667202}
+  m_Layer: 0
+  m_Name: Currency Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &720667202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 720667201}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f22e4af316ad5a4f9443e9968dca0bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CurrencyManager
+  currentCurrency: 0
+  currentXP: 0
+  currentLevel: 1
+  xpToNextLevel: 100
+  xpMultiplier: 1.5
+--- !u!4 &720667203
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 720667201}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.12139, y: 0.79056, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &835614333
 GameObject:
   m_ObjectHideFlags: 0
@@ -822,6 +871,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 835614334}
+  - {fileID: 2109243809}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1656090708 stripped
@@ -841,6 +891,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a2661f2020e0e04fa54e9e716331b50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
+  baseAttackDamage: 25
+  baseAttackRange: 1.5
+  baseAttackCooldown: 0.5
+  baseMoveSpeed: 5
+  damageUpgradeLevel: 0
+  rangeUpgradeLevel: 0
+  speedUpgradeLevel: 0
+  attackSpeedUpgradeLevel: 0
+  damageUpgradeCost: 20
+  rangeUpgradeCost: 25
+  speedUpgradeCost: 30
+  attackSpeedUpgradeCost: 35
+  damagePerUpgrade: 5
+  rangePerUpgrade: 0.3
+  speedPerUpgrade: 0.5
+  attackSpeedPerUpgrade: 0.05
   moveSpeed: 5
   attackDamage: 25
   attackRange: 1.5
@@ -851,6 +917,9 @@ MonoBehaviour:
   health: 100
   maxHealth: 100
   damageColor: {r: 1, g: 0, b: 0, a: 1}
+  healCost: 10
+  healAmount: 25
+  healKey: 101
   attackHitbox: {fileID: 1656090708}
   animator: {fileID: 1656090712}
 --- !u!95 &1656090712 stripped
@@ -84202,6 +84271,74 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &2109243808
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2109243809}
+  - component: {fileID: 2109243810}
+  - component: {fileID: 2109243811}
+  m_Layer: 5
+  m_Name: CurrencyUI
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2109243809
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2109243808}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 3.44819, y: -0.4668, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1558041807}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2109243810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2109243808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.UIElements.UIDocument
+  m_PanelSettings: {fileID: 11400000, guid: 10234fdcad644d94fbb4693f854bce17, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: 2f9c18060e48c4c48b64d0590501c7af, type: 3}
+  m_SortingOrder: 0
+  m_Position: 0
+  m_WorldSpaceSizeMode: 1
+  m_WorldSpaceWidth: 1920
+  m_WorldSpaceHeight: 1080
+  m_PivotReferenceSize: 0
+  m_Pivot: 0
+  m_WorldSpaceCollider: {fileID: 0}
+--- !u!114 &2109243811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2109243808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69634169f2d973e4aae01e8ef900ac75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CurrencyUIController
 --- !u!1001 &6094461877610623702
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -84217,6 +84354,14 @@ PrefabInstance:
     - target: {fileID: 163821422396400022, guid: 3a14a009de1b3964eacb43e462e595b0, type: 3}
       propertyPath: stopDistance
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 163821422396400022, guid: 3a14a009de1b3964eacb43e462e595b0, type: 3}
+      propertyPath: xpDropAmount
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 163821422396400022, guid: 3a14a009de1b3964eacb43e462e595b0, type: 3}
+      propertyPath: currencyDropAmount
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 3188191784006217471, guid: 3a14a009de1b3964eacb43e462e595b0, type: 3}
       propertyPath: m_IsTrigger
@@ -84375,8 +84520,7 @@ PrefabInstance:
       propertyPath: m_CollisionDetection
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1065395722964602527, guid: 9361e61317eda3a4480295bff8cf56b5, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -84394,3 +84538,4 @@ SceneRoots:
   - {fileID: 1356988197}
   - {fileID: 866602517}
   - {fileID: 1558041807}
+  - {fileID: 720667203}
