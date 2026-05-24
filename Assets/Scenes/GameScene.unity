@@ -119,6 +119,55 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &21895005
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 21895006}
+  - component: {fileID: 21895007}
+  m_Layer: 0
+  m_Name: GameObject (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &21895006
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 21895005}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1356988197}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &21895007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 21895005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0852c5ed0068eb4883ddefbe22b24a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WaveManager
+  currentWave: 0
+  enemiesPerWave: 5
+  enemiesPerWaveMultiplier: 1.5
+  timeBetweenWaves: 10
+  slimePrefab: {fileID: 0}
+  spawnPoints: []
+  spawnDelay: 0.5
 --- !u!4 &429648384 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7740722111251525486, guid: 9361e61317eda3a4480295bff8cf56b5, type: 3}
@@ -384,6 +433,57 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &640596001
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 640596002}
+  - component: {fileID: 640596003}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &640596002
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 640596001}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7, y: -3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1356988197}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &640596003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 640596001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0852c5ed0068eb4883ddefbe22b24a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WaveManager
+  currentWave: 0
+  enemiesPerWave: 5
+  enemiesPerWaveMultiplier: 1.5
+  timeBetweenWaves: 10
+  slimePrefab: {fileID: 3528304491443739896, guid: 3a14a009de1b3964eacb43e462e595b0, type: 3}
+  spawnPoints: []
+  spawnDelay: 0.5
 --- !u!1 &720667201
 GameObject:
   m_ObjectHideFlags: 0
@@ -414,10 +514,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CurrencyManager
   currentCurrency: 0
-  currentXP: 0
-  currentLevel: 1
-  xpToNextLevel: 100
-  xpMultiplier: 1.5
 --- !u!4 &720667203
 Transform:
   m_ObjectHideFlags: 0
@@ -804,11 +900,57 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!4 &1353501873 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8409758054904907942, guid: 3a14a009de1b3964eacb43e462e595b0, type: 3}
-  m_PrefabInstance: {fileID: 6094461877610623702}
+--- !u!1 &1176533604
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1176533605}
+  - component: {fileID: 1176533606}
+  m_Layer: 0
+  m_Name: GameObject (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1176533605
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1176533604}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -8, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1356988197}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1176533606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1176533604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0852c5ed0068eb4883ddefbe22b24a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WaveManager
+  currentWave: 0
+  enemiesPerWave: 5
+  enemiesPerWaveMultiplier: 1.5
+  timeBetweenWaves: 10
+  slimePrefab: {fileID: 0}
+  spawnPoints: []
+  spawnDelay: 0.5
 --- !u!1 &1356988196
 GameObject:
   m_ObjectHideFlags: 0
@@ -818,8 +960,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1356988197}
+  - component: {fileID: 1356988198}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: Spawnpoints
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -838,8 +981,65 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1353501873}
+  - {fileID: 640596002}
+  - {fileID: 1400295759}
+  - {fileID: 21895006}
+  - {fileID: 1176533605}
   m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1356988198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1356988196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0852c5ed0068eb4883ddefbe22b24a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WaveManager
+  currentWave: 0
+  enemiesPerWave: 5
+  enemiesPerWaveMultiplier: 1.5
+  timeBetweenWaves: 10
+  slimePrefab: {fileID: 3528304491443739896, guid: 3a14a009de1b3964eacb43e462e595b0, type: 3}
+  spawnPoints:
+  - {fileID: 640596002}
+  - {fileID: 1400295759}
+  - {fileID: 21895006}
+  - {fileID: 1176533605}
+  spawnDelay: 0.5
+--- !u!1 &1400295758
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1400295759}
+  m_Layer: 0
+  m_Name: GameObject (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1400295759
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1400295758}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -8, y: -3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1356988197}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1558041806
 GameObject:
@@ -892,21 +1092,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   baseAttackDamage: 25
-  baseAttackRange: 1.5
   baseAttackCooldown: 0.5
   baseMoveSpeed: 5
-  damageUpgradeLevel: 0
-  rangeUpgradeLevel: 0
-  speedUpgradeLevel: 0
-  attackSpeedUpgradeLevel: 0
-  damageUpgradeCost: 20
-  rangeUpgradeCost: 25
-  speedUpgradeCost: 30
-  attackSpeedUpgradeCost: 35
+  baseMaxHealth: 100
+  baseCoinMultiplier: 1
+  currentAttackDamage: 0
+  currentAttackCooldown: 0
+  currentMoveSpeed: 0
+  currentMaxHealth: 0
+  currentCoinMultiplier: 0
+  currentDefense: 0
+  damageLevel: 0
+  attackSpeedLevel: 0
+  speedLevel: 0
+  defenseLevel: 0
+  healthLevel: 0
+  coinMultiplierLevel: 0
+  damageCost: 20
+  attackSpeedCost: 25
+  speedCost: 30
+  defenseCost: 35
+  healthCost: 40
+  coinMultiplierCost: 50
+  costIncreaseMultiplier: 1.5
   damagePerUpgrade: 5
-  rangePerUpgrade: 0.3
-  speedPerUpgrade: 0.5
   attackSpeedPerUpgrade: 0.05
+  speedPerUpgrade: 0.5
+  defensePerUpgrade: 5
+  healthPerUpgrade: 20
+  coinMultiplierPerUpgrade: 0.2
   moveSpeed: 5
   attackDamage: 25
   attackRange: 1.5
@@ -84339,119 +84553,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69634169f2d973e4aae01e8ef900ac75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CurrencyUIController
---- !u!1001 &6094461877610623702
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1356988197}
-    m_Modifications:
-    - target: {fileID: 163821422396400022, guid: 3a14a009de1b3964eacb43e462e595b0, type: 3}
-      propertyPath: attackDamage
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 163821422396400022, guid: 3a14a009de1b3964eacb43e462e595b0, type: 3}
-      propertyPath: stopDistance
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 163821422396400022, guid: 3a14a009de1b3964eacb43e462e595b0, type: 3}
-      propertyPath: xpDropAmount
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 163821422396400022, guid: 3a14a009de1b3964eacb43e462e595b0, type: 3}
-      propertyPath: currencyDropAmount
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 3188191784006217471, guid: 3a14a009de1b3964eacb43e462e595b0, type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3188191784006217471, guid: 3a14a009de1b3964eacb43e462e595b0, type: 3}
-      propertyPath: m_ForceReceiveLayers.m_Bits
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 3528304491443739896, guid: 3a14a009de1b3964eacb43e462e595b0, type: 3}
-      propertyPath: m_Name
-      value: Slime
-      objectReference: {fileID: 0}
-    - target: {fileID: 6280524923843402015, guid: 3a14a009de1b3964eacb43e462e595b0, type: 3}
-      propertyPath: m_BodyType
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6280524923843402015, guid: 3a14a009de1b3964eacb43e462e595b0, type: 3}
-      propertyPath: m_Interpolate
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6280524923843402015, guid: 3a14a009de1b3964eacb43e462e595b0, type: 3}
-      propertyPath: m_GravityScale
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6280524923843402015, guid: 3a14a009de1b3964eacb43e462e595b0, type: 3}
-      propertyPath: m_SleepingMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6280524923843402015, guid: 3a14a009de1b3964eacb43e462e595b0, type: 3}
-      propertyPath: m_CollisionDetection
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6280524923843402015, guid: 3a14a009de1b3964eacb43e462e595b0, type: 3}
-      propertyPath: m_ExcludeLayers.m_Bits
-      value: 256
-      objectReference: {fileID: 0}
-    - target: {fileID: 6280524923843402015, guid: 3a14a009de1b3964eacb43e462e595b0, type: 3}
-      propertyPath: m_IncludeLayers.m_Bits
-      value: 255
-      objectReference: {fileID: 0}
-    - target: {fileID: 6280524923843402015, guid: 3a14a009de1b3964eacb43e462e595b0, type: 3}
-      propertyPath: m_UseFullKinematicContacts
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8409758054904907942, guid: 3a14a009de1b3964eacb43e462e595b0, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -2.2488
-      objectReference: {fileID: 0}
-    - target: {fileID: 8409758054904907942, guid: 3a14a009de1b3964eacb43e462e595b0, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -3.3168201
-      objectReference: {fileID: 0}
-    - target: {fileID: 8409758054904907942, guid: 3a14a009de1b3964eacb43e462e595b0, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8409758054904907942, guid: 3a14a009de1b3964eacb43e462e595b0, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8409758054904907942, guid: 3a14a009de1b3964eacb43e462e595b0, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8409758054904907942, guid: 3a14a009de1b3964eacb43e462e595b0, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8409758054904907942, guid: 3a14a009de1b3964eacb43e462e595b0, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8409758054904907942, guid: 3a14a009de1b3964eacb43e462e595b0, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8409758054904907942, guid: 3a14a009de1b3964eacb43e462e595b0, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8409758054904907942, guid: 3a14a009de1b3964eacb43e462e595b0, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 3a14a009de1b3964eacb43e462e595b0, type: 3}
 --- !u!1001 &6786591695499206322
 PrefabInstance:
   m_ObjectHideFlags: 0

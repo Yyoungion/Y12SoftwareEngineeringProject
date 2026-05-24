@@ -1,0 +1,45 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:VisualElement name="Overlay" style="flex-grow: 1; width: auto; height: auto; background-color: rgba(0, 0, 0, 0.78); position: absolute;">
+        <ui:VisualElement name="MenuContainer" style="flex-grow: 1; width: 600px; height: 700px; align-self: center; margin-top: auto; margin-right: auto; margin-bottom: auto; margin-left: auto; align-items: center; background-color: rgb(20, 30, 60); border-top-width: 4px; border-right-width: 4px; border-bottom-width: 4px; border-left-width: 4px; border-top-left-radius: 15px; border-top-right-radius: 15px; border-bottom-right-radius: 15px; border-bottom-left-radius: 15px; border-left-color: rgb(255, 215, 0); border-right-color: rgb(255, 215, 0); border-top-color: rgb(255, 215, 0); border-bottom-color: rgb(255, 215, 0); padding-top: 20px; padding-right: 20px; padding-bottom: 20px; padding-left: 20px;">
+            <ui:Label text="UPGRADES" name="TitleLabel" style="font-size: 48px; color: rgb(255, 215, 0); -unity-font-style: bold; -unity-text-align: upper-center; margin-bottom: 20px;"/>
+            <ui:Label text="Gold: 0" name="CurrentGoldLabel" style="font-size: 24px; color: rgb(255, 215, 0); -unity-text-align: middle-center; margin-bottom: 30px;"/>
+            <ui:VisualElement name="UpgradebuttonsContainer" style="flex-grow: 1;">
+                <ui:VisualElement name="DamageUpgradeRow" style="flex-grow: 1; flex-direction: row; height: 80px; margin-bottom: 10px; background-color: rgba(0, 0, 0, 0.39); border-top-left-radius: 8px; border-top-right-radius: 8px; border-bottom-right-radius: 8px; border-bottom-left-radius: 8px; padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px; justify-content: space-between; align-items: center;">
+                    <ui:VisualElement name="DamageInfo" style="flex-grow: 1;">
+                        <ui:Label text="Attack Damage" name="DamageTitle" style="font-size: 20px; color: rgb(255, 255, 255); -unity-font-style: bold;"/>
+                        <ui:Label text="Level 0 → +5 damage per level" name="DamageDescription" style="color: rgb(180, 180, 180);"/>
+                    </ui:VisualElement>
+                    <ui:Button text="20 Gold" name="DamageUpgradeButton" style="width: 120px; height: 50px; background-color: rgb(50, 200, 100); border-top-left-radius: 8px; border-top-right-radius: 8px; border-bottom-right-radius: 8px; border-bottom-left-radius: 8px; border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-left-color: rgb(20, 130, 0); border-right-color: rgb(20, 130, 0); border-top-color: rgb(20, 130, 0); border-bottom-color: rgb(20, 130, 0); font-size: 18px; color: rgb(255, 255, 255); -unity-font-style: bold;"/>
+                </ui:VisualElement>
+                <ui:VisualElement name="AttackSpeedUpgradeRow" style="flex-grow: 1; flex-direction: row; height: 80px; margin-bottom: 10px; background-color: rgba(0, 0, 0, 0.39); border-top-left-radius: 8px; border-top-right-radius: 8px; border-bottom-right-radius: 8px; border-bottom-left-radius: 8px; padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px; justify-content: space-between; align-items: center;">
+                    <ui:VisualElement name="AttackSpeedInfo" style="flex-grow: 1;">
+                        <ui:Label text="Attack Speed" name="AttackSpeedTitle" style="font-size: 20px; color: rgb(255, 255, 255); -unity-font-style: bold;"/>
+                        <ui:Label text="Level 0 → -0.05s cooldown" name="AttackSpeedDescription" style="color: rgb(180, 180, 180);"/>
+                    </ui:VisualElement>
+                    <ui:Button text="25 Gold" name="AttackSpeedUpgradeButton" style="width: 120px; height: 50px; background-color: rgb(50, 200, 100); border-top-left-radius: 8px; border-top-right-radius: 8px; border-bottom-right-radius: 8px; border-bottom-left-radius: 8px; border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-left-color: rgb(20, 130, 0); border-right-color: rgb(20, 130, 0); border-top-color: rgb(20, 130, 0); border-bottom-color: rgb(20, 130, 0); font-size: 18px; color: rgb(255, 255, 255); -unity-font-style: bold;"/>
+                </ui:VisualElement>
+                <ui:VisualElement name="SpeedUpgradeRow" style="flex-grow: 1; flex-direction: row; height: 80px; margin-bottom: 10px; background-color: rgba(0, 0, 0, 0.39); border-top-left-radius: 8px; border-top-right-radius: 8px; border-bottom-right-radius: 8px; border-bottom-left-radius: 8px; padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px; justify-content: space-between; align-items: center;">
+                    <ui:VisualElement name="SpeedInfo" style="flex-grow: 1;">
+                        <ui:Label text="Move Speed" name="SpeedTitle" style="font-size: 20px; color: rgb(255, 255, 255); -unity-font-style: bold;"/>
+                        <ui:Label text="Level 0 → +0.5 speed" name="SpeedDescription" style="color: rgb(180, 180, 180);"/>
+                    </ui:VisualElement>
+                    <ui:Button text="30 Gold" name="SpeedUpgradeButton" style="width: 120px; height: 50px; background-color: rgb(50, 200, 100); border-top-left-radius: 8px; border-top-right-radius: 8px; border-bottom-right-radius: 8px; border-bottom-left-radius: 8px; border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-left-color: rgb(20, 130, 0); border-right-color: rgb(20, 130, 0); border-top-color: rgb(20, 130, 0); border-bottom-color: rgb(20, 130, 0); font-size: 18px; color: rgb(255, 255, 255); -unity-font-style: bold;"/>
+                </ui:VisualElement>
+                <ui:VisualElement name="DefenceUpgradeRow" style="flex-grow: 1; flex-direction: row; height: 80px; margin-bottom: 10px; background-color: rgba(0, 0, 0, 0.39); border-top-left-radius: 8px; border-top-right-radius: 8px; border-bottom-right-radius: 8px; border-bottom-left-radius: 8px; padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px; justify-content: space-between; align-items: center;">
+                    <ui:VisualElement name="DefenceInfo" style="flex-grow: 1;">
+                        <ui:Label text="Defence" name="DefenceTitle" style="font-size: 20px; color: rgb(255, 255, 255); -unity-font-style: bold;"/>
+                        <ui:Label text="Level 0 → +5% damage reduction" name="DefenceDescription" style="color: rgb(180, 180, 180);"/>
+                    </ui:VisualElement>
+                    <ui:Button text="35 Gold" name="DefenceUpgradeButton" style="width: 120px; height: 50px; background-color: rgb(50, 200, 100); border-top-left-radius: 8px; border-top-right-radius: 8px; border-bottom-right-radius: 8px; border-bottom-left-radius: 8px; border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-left-color: rgb(20, 130, 0); border-right-color: rgb(20, 130, 0); border-top-color: rgb(20, 130, 0); border-bottom-color: rgb(20, 130, 0); font-size: 18px; color: rgb(255, 255, 255); -unity-font-style: bold;"/>
+                </ui:VisualElement>
+                <ui:VisualElement name="DefenceUpgradeRow" style="flex-grow: 1; flex-direction: row; height: 80px; margin-bottom: 10px; background-color: rgba(0, 0, 0, 0.39); border-top-left-radius: 8px; border-top-right-radius: 8px; border-bottom-right-radius: 8px; border-bottom-left-radius: 8px; padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px; justify-content: space-between; align-items: center;">
+                    <ui:VisualElement name="DefenceInfo" style="flex-grow: 1;">
+                        <ui:Label text="Defence" name="DefenceTitle" style="font-size: 20px; color: rgb(255, 255, 255); -unity-font-style: bold;"/>
+                        <ui:Label text="Level 0 → +5% damage reduction" name="DefenceDescription" style="color: rgb(180, 180, 180);"/>
+                    </ui:VisualElement>
+                    <ui:Button text="35 Gold" name="DefenceUpgradeButton" style="width: 120px; height: 50px; background-color: rgb(50, 200, 100); border-top-left-radius: 8px; border-top-right-radius: 8px; border-bottom-right-radius: 8px; border-bottom-left-radius: 8px; border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-left-color: rgb(20, 130, 0); border-right-color: rgb(20, 130, 0); border-top-color: rgb(20, 130, 0); border-bottom-color: rgb(20, 130, 0); font-size: 18px; color: rgb(255, 255, 255); -unity-font-style: bold;"/>
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

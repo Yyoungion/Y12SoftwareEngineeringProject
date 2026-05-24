@@ -198,7 +198,7 @@ public class SlimeEnemy : MonoBehaviour
     
     void DamagePlayer()
     {
-        PlayerController playerController = player.GetComponent<PlayerController>();
+        PlayerController playerController = PlayerController.Instance != null ? PlayerController.Instance : player.GetComponent<PlayerController>();
         if (playerController != null)
         {
             playerController.TakeDamage(attackDamage);
@@ -256,11 +256,19 @@ public class SlimeEnemy : MonoBehaviour
     {
         Debug.Log("Slime died!");
         
-        // Drop currency and XP
+        // Drop currency with multiplier
         if (CurrencyManager.Instance != null)
         {
-            CurrencyManager.Instance.AddCurrency(currencyDropAmount);
-            CurrencyManager.Instance.AddXP(xpDropAmount);
+            int actualCurrency = currencyDropAmount;
+            
+            // Apply coin multiplier
+            if (PlayerController.Instance != null)
+            {
+                actualCurrency = Mathf.RoundToInt(currencyDropAmount * PlayerController.Instance.currentCoinMultiplier);
+            }
+            
+            CurrencyManager.Instance.AddCurrency(actualCurrency);
+            Debug.Log($"Dropped {actualCurrency} gold!");
         }
         
         // Stop all movement
@@ -280,7 +288,7 @@ public class SlimeEnemy : MonoBehaviour
         // Destroy after delay
         Destroy(gameObject, 1f);
     }
-    
+        
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;

@@ -8,29 +8,46 @@ public class PlayerController : MonoBehaviour
 {
 	public static PlayerController Instance { get; private set; }
 
-	[Header("Base Stats")]
-	public float baseAttackDamage = 25f;
-	public float baseAttackRange = 1.5f;
-	public float baseAttackCooldown = 0.5f;
-	public float baseMoveSpeed = 5f;
+    [Header("Base Stats")]
+    public float baseAttackDamage = 25f;
+    public float baseAttackCooldown = 0.5f;
+    public float baseMoveSpeed = 5f;
+    public float baseMaxHealth = 100f;
+    public float baseCoinMultiplier = 1f;
 
-	[Header("Upgrades")]
-	public int damageUpgradeLevel = 0;
-	public int rangeUpgradeLevel = 0;
-	public int speedUpgradeLevel = 0;
-	public int attackSpeedUpgradeLevel = 0;
+    [Header("Current Stats")]
+    public float currentAttackDamage;
+    public float currentAttackCooldown;
+    public float currentMoveSpeed;
+    public float currentMaxHealth;
+    public float currentCoinMultiplier;
+    public float currentDefense = 0f;
 
-	[Header("Upgrade Costs")]
-	public int damageUpgradeCost = 20;
-	public int rangeUpgradeCost = 25;
-	public int speedUpgradeCost = 30;
-	public int attackSpeedUpgradeCost = 35;
+    [Header("Upgrade Levels")]
+    public int damageLevel = 0;
+    public int attackSpeedLevel = 0;
+    public int speedLevel = 0;
+    public int defenseLevel = 0;
+    public int healthLevel = 0;
+    public int coinMultiplierLevel = 0;
 
-	[Header("Upgrade Amounts")]
-	public float damagePerUpgrade = 5f;
-	public float rangePerUpgrade = 0.3f;
-	public float speedPerUpgrade = 0.5f;
-	public float attackSpeedPerUpgrade = 0.05f; // reduces cooldown
+    [Header("Upgrade Costs")]
+    public int damageCost = 20;
+    public int attackSpeedCost = 25;
+    public int speedCost = 30;
+    public int defenseCost = 35;
+    public int healthCost = 40;
+    public int coinMultiplierCost = 50;
+    
+    public float costIncreaseMultiplier = 1.5f;
+
+    [Header("Upgrade Amounts")]
+    public float damagePerUpgrade = 5f;
+    public float attackSpeedPerUpgrade = 0.05f; // Reduces cooldown
+    public float speedPerUpgrade = 0.5f;
+    public float defensePerUpgrade = 5f; // 5% damage reduction per level
+    public float healthPerUpgrade = 20f;
+    public float coinMultiplierPerUpgrade = 0.2f;
 
 	[Header("Movement")]
 	public float moveSpeed = 5f;
@@ -77,9 +94,9 @@ public class PlayerController : MonoBehaviour
 
 		// initialize base stats from current inspector values
 		baseAttackDamage = attackDamage;
-		baseAttackRange = attackRange;
 		baseAttackCooldown = attackCooldown;
 		baseMoveSpeed = moveSpeed;
+		baseMaxHealth = maxHealth;
 
 		rb = GetComponent<Rigidbody2D>();
 		animator = animator == null ? GetComponent<Animator>() : animator;
@@ -114,10 +131,6 @@ public class PlayerController : MonoBehaviour
 		{
 			if (UpgradeDamage()) Debug.Log("Upgraded Damage!");
 		}
-		if (Input.GetKeyDown(KeyCode.Alpha2))
-		{
-			if (UpgradeRange()) Debug.Log("Upgraded Range!");
-		}
 		if (Input.GetKeyDown(KeyCode.Alpha3))
 		{
 			if (UpgradeSpeed()) Debug.Log("Upgraded Speed!");
@@ -126,11 +139,23 @@ public class PlayerController : MonoBehaviour
 		{
 			if (UpgradeAttackSpeed()) Debug.Log("Upgraded Attack Speed!");
 		}
+		if (Input.GetKeyDown(KeyCode.Alpha5))
+		{
+			if (UpgradeDefense()) Debug.Log("Upgraded Defense!");
+		}
+		if (Input.GetKeyDown(KeyCode.Alpha6))
+		{
+			if (UpgradeHealth()) Debug.Log("Upgraded Health!");
+		}
+		if (Input.GetKeyDown(KeyCode.Alpha7))
+		{
+			if (UpgradeCoinMultiplier()) Debug.Log("Upgraded Coin Multiplier!");
+		}
 	}
 
 	private void FixedUpdate()
 	{
-		rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+		rb.MovePosition(rb.position + movement * currentMoveSpeed * Time.fixedDeltaTime);
 	}
 
 	public void EnableHitbox()
@@ -151,10 +176,11 @@ public class PlayerController : MonoBehaviour
 
 	public void TakeDamage(float damage)
 	{
+		damage = ApplyDefense(damage);
 		health -= damage;
-		StartCoroutine(DamageFlash());
-		Debug.Log("Player took " + damage + " damage! Health: " + health);
-
+		
+		Debug.Log($"Player took {damage} damage! Health: {health}");
+		
 		if (health <= 0)
 		{
 			Die();
@@ -285,46 +311,30 @@ public class PlayerController : MonoBehaviour
 
 	public void RecalculateStats()
 	{
-		attackDamage = baseAttackDamage + (damageUpgradeLevel * damagePerUpgrade);
-		attackRange = baseAttackRange + (rangeUpgradeLevel * rangePerUpgrade);
-		moveSpeed = baseMoveSpeed + (speedUpgradeLevel * speedPerUpgrade);
-		attackCooldown = Mathf.Max(0.1f, baseAttackCooldown - (attackSpeedUpgradeLevel * attackSpeedPerUpgrade));
+		currentAttackDamage = baseAttackDamage + (damageLevel * damagePerUpgrade);
+		currentAttackCooldown = Mathf.Max(0.1f, baseAttackCooldown - (attackSpeedLevel * attackSpeedPerUpgrade));
+		currentMoveSpeed = baseMoveSpeed + (speedLevel * speedPerUpgrade);
+		currentDefense = defenseLevel * defensePerUpgrade;
+		currentMaxHealth = baseMaxHealth + (healthLevel * healthPerUpgrade);
+		currentCoinMultiplier = baseCoinMultiplier + (coinMultiplierLevel * coinMultiplierPerUpgrade);
 
-		// If other attack scripts exist, they should read these updated values from this controller.
+		float healthPercent = maxHealth > 0f ? health / maxHealth : 1f;
+		maxHealth = currentMaxHealth;
+		health = Mathf.Clamp(maxHealth * healthPercent, 0f, maxHealth);
 
-		Debug.Log($"Stats Updated - Damage: {attackDamage}, Range: {attackRange}, Speed: {moveSpeed}, Attack Speed: {attackCooldown}");
+		attackDamage = currentAttackDamage;
+		attackCooldown = currentAttackCooldown;
+		moveSpeed = currentMoveSpeed;
+
+		Debug.Log($"Stats Updated - Damage: {currentAttackDamage}, Attack Speed: {currentAttackCooldown}s, Speed: {currentMoveSpeed}, Defense: {currentDefense}%, Max Health: {currentMaxHealth}, Coin Mult: {currentCoinMultiplier}x");
 	}
 
 	public bool UpgradeDamage()
 	{
-		if (CurrencyManager.Instance.SpendCurrency(damageUpgradeCost))
+		if (CurrencyManager.Instance != null && CurrencyManager.Instance.SpendCurrency(damageCost))
 		{
-			damageUpgradeLevel++;
-			damageUpgradeCost = Mathf.RoundToInt(damageUpgradeCost * 1.5f);
-			RecalculateStats();
-			return true;
-		}
-		return false;
-	}
-
-	public bool UpgradeRange()
-	{
-		if (CurrencyManager.Instance.SpendCurrency(rangeUpgradeCost))
-		{
-			rangeUpgradeLevel++;
-			rangeUpgradeCost = Mathf.RoundToInt(rangeUpgradeCost * 1.5f);
-			RecalculateStats();
-			return true;
-		}
-		return false;
-	}
-
-	public bool UpgradeSpeed()
-	{
-		if (CurrencyManager.Instance.SpendCurrency(speedUpgradeCost))
-		{
-			speedUpgradeLevel++;
-			speedUpgradeCost = Mathf.RoundToInt(speedUpgradeCost * 1.5f);
+			damageLevel++;
+			damageCost = Mathf.RoundToInt(damageCost * costIncreaseMultiplier);
 			RecalculateStats();
 			return true;
 		}
@@ -333,14 +343,68 @@ public class PlayerController : MonoBehaviour
 
 	public bool UpgradeAttackSpeed()
 	{
-		if (CurrencyManager.Instance.SpendCurrency(attackSpeedUpgradeCost))
+		if (CurrencyManager.Instance != null && CurrencyManager.Instance.SpendCurrency(attackSpeedCost))
 		{
-			attackSpeedUpgradeLevel++;
-			attackSpeedUpgradeCost = Mathf.RoundToInt(attackSpeedUpgradeCost * 1.5f);
+			attackSpeedLevel++;
+			attackSpeedCost = Mathf.RoundToInt(attackSpeedCost * costIncreaseMultiplier);
 			RecalculateStats();
 			return true;
 		}
 		return false;
+	}
+
+	public bool UpgradeSpeed()
+	{
+		if (CurrencyManager.Instance != null && CurrencyManager.Instance.SpendCurrency(speedCost))
+		{
+			speedLevel++;
+			speedCost = Mathf.RoundToInt(speedCost * costIncreaseMultiplier);
+			RecalculateStats();
+			return true;
+		}
+		return false;
+	}
+
+	public bool UpgradeDefense()
+	{
+		if (CurrencyManager.Instance != null && CurrencyManager.Instance.SpendCurrency(defenseCost))
+		{
+			defenseLevel++;
+			defenseCost = Mathf.RoundToInt(defenseCost * costIncreaseMultiplier);
+			RecalculateStats();
+			return true;
+		}
+		return false;
+	}
+
+	public bool UpgradeHealth()
+	{
+		if (CurrencyManager.Instance != null && CurrencyManager.Instance.SpendCurrency(healthCost))
+		{
+			healthLevel++;
+			healthCost = Mathf.RoundToInt(healthCost * costIncreaseMultiplier);
+			RecalculateStats();
+			return true;
+		}
+		return false;
+	}
+
+	public bool UpgradeCoinMultiplier()
+	{
+		if (CurrencyManager.Instance != null && CurrencyManager.Instance.SpendCurrency(coinMultiplierCost))
+		{
+			coinMultiplierLevel++;
+			coinMultiplierCost = Mathf.RoundToInt(coinMultiplierCost * costIncreaseMultiplier);
+			RecalculateStats();
+			return true;
+		}
+		return false;
+	}
+
+	public float ApplyDefense(float incomingDamage)
+	{
+		float damageReduction = currentDefense / 100f;
+		return incomingDamage * (1f - damageReduction);
 	}
 
 	private void OnDrawGizmosSelected()
