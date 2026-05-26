@@ -82,7 +82,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 2091079211
-  m_SortingLayer: -4
+  m_SortingLayer: -5
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 368543389579951487, guid: 99fa25805efd5054d8d62920cae08552, type: 3}
@@ -103,7 +103,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3528304491443739896}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -118,9 +118,9 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!61 &3188191784006217471
 BoxCollider2D:
@@ -135,10 +135,10 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 704
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 319
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -205,12 +205,14 @@ MonoBehaviour:
   health: 60
   maxHealth: 50
   attackDamage: 5
-  walkSpeed: 1.5
-  detectionRange: 50
-  stopDistance: 5
+  walkSpeed: 2
+  detectionRange: 1000
+  stopDistance: 2
   attackRange: 2
   jumpSpeed: 5
   jumpDuration: 0.5
   attackCooldown: 2
+  currencyDropAmount: 5
+  xpDropAmount: 10
   player: {fileID: 0}
   animator: {fileID: 0}

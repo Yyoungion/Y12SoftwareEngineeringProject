@@ -96,6 +96,8 @@ public class SlimeEnemy : MonoBehaviour
             StopWalking(lastDirection);
         }
     }
+
+    
     
     bool CanAttack()
     {
@@ -170,10 +172,8 @@ public class SlimeEnemy : MonoBehaviour
     void EndJumpAttack()
     {
         Debug.Log("Jump attack finished!");
-        
         isAttacking = false;
         rb.linearVelocity = Vector2.zero;
-        
         // CRITICAL: Set IsAttacking to false so we can return to Idle
         animator.SetBool("IsAttacking", false);
         
@@ -274,7 +274,7 @@ public class SlimeEnemy : MonoBehaviour
         // Stop all movement
         isAttacking = false;
         isWalking = false;
-        rb.linearVelocity = Vector2.zero;
+        if (rb != null) rb.linearVelocity = Vector2.zero;
         
         // Play death animation
         if (animator != null)

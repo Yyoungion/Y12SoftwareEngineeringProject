@@ -32,14 +32,22 @@
                     </ui:VisualElement>
                     <ui:Button text="35 Gold" name="DefenceUpgradeButton" style="width: 120px; height: 50px; background-color: rgb(50, 200, 100); border-top-left-radius: 8px; border-top-right-radius: 8px; border-bottom-right-radius: 8px; border-bottom-left-radius: 8px; border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-left-color: rgb(20, 130, 0); border-right-color: rgb(20, 130, 0); border-top-color: rgb(20, 130, 0); border-bottom-color: rgb(20, 130, 0); font-size: 18px; color: rgb(255, 255, 255); -unity-font-style: bold;"/>
                 </ui:VisualElement>
-                <ui:VisualElement name="DefenceUpgradeRow" style="flex-grow: 1; flex-direction: row; height: 80px; margin-bottom: 10px; background-color: rgba(0, 0, 0, 0.39); border-top-left-radius: 8px; border-top-right-radius: 8px; border-bottom-right-radius: 8px; border-bottom-left-radius: 8px; padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px; justify-content: space-between; align-items: center;">
-                    <ui:VisualElement name="DefenceInfo" style="flex-grow: 1;">
-                        <ui:Label text="Defence" name="DefenceTitle" style="font-size: 20px; color: rgb(255, 255, 255); -unity-font-style: bold;"/>
-                        <ui:Label text="Level 0 → +5% damage reduction" name="DefenceDescription" style="color: rgb(180, 180, 180);"/>
+                <ui:VisualElement name="MaxHealthUpgradeRow" style="flex-grow: 1; flex-direction: row; height: 80px; margin-bottom: 10px; background-color: rgba(0, 0, 0, 0.39); border-top-left-radius: 8px; border-top-right-radius: 8px; border-bottom-right-radius: 8px; border-bottom-left-radius: 8px; padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px; justify-content: space-between; align-items: center;">
+                    <ui:VisualElement name="MaxHealthInfo" style="flex-grow: 1;">
+                        <ui:Label text="Max Health" name="MaxHealthInfo" style="font-size: 20px; color: rgb(255, 255, 255); -unity-font-style: bold;"/>
+                        <ui:Label text="Level 0 → +20 max health" name="MaxHealthDescription" style="color: rgb(180, 180, 180);"/>
                     </ui:VisualElement>
-                    <ui:Button text="35 Gold" name="DefenceUpgradeButton" style="width: 120px; height: 50px; background-color: rgb(50, 200, 100); border-top-left-radius: 8px; border-top-right-radius: 8px; border-bottom-right-radius: 8px; border-bottom-left-radius: 8px; border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-left-color: rgb(20, 130, 0); border-right-color: rgb(20, 130, 0); border-top-color: rgb(20, 130, 0); border-bottom-color: rgb(20, 130, 0); font-size: 18px; color: rgb(255, 255, 255); -unity-font-style: bold;"/>
+                    <ui:Button text="30 Gold" name="MaxHealthUpgradeButton" style="width: 120px; height: 50px; background-color: rgb(50, 200, 100); border-top-left-radius: 8px; border-top-right-radius: 8px; border-bottom-right-radius: 8px; border-bottom-left-radius: 8px; border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-left-color: rgb(20, 130, 0); border-right-color: rgb(20, 130, 0); border-top-color: rgb(20, 130, 0); border-bottom-color: rgb(20, 130, 0); font-size: 18px; color: rgb(255, 255, 255); -unity-font-style: bold;"/>
+                </ui:VisualElement>
+                <ui:VisualElement name="CoinMultiplierUpgradeRow" style="flex-grow: 1; flex-direction: row; height: 80px; margin-bottom: 10px; background-color: rgba(0, 0, 0, 0.39); border-top-left-radius: 8px; border-top-right-radius: 8px; border-bottom-right-radius: 8px; border-bottom-left-radius: 8px; padding-top: 10px; padding-right: 10px; padding-bottom: 10px; padding-left: 10px; justify-content: space-between; align-items: center;">
+                    <ui:VisualElement name="CoinMultiplierInfo" style="flex-grow: 1;">
+                        <ui:Label text="Coin Multiplier" name="CoinMultiplierTitle" style="font-size: 20px; color: rgb(255, 255, 255); -unity-font-style: bold;"/>
+                        <ui:Label text="Level 0 → +20% coins from kills" name="CoinMultiplierDescription" style="color: rgb(180, 180, 180);"/>
+                    </ui:VisualElement>
+                    <ui:Button text="50 Gold" name="CoinMultiplierUpgradeButton" style="width: 120px; height: 50px; background-color: rgb(50, 200, 100); border-top-left-radius: 8px; border-top-right-radius: 8px; border-bottom-right-radius: 8px; border-bottom-left-radius: 8px; border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-left-color: rgb(20, 130, 0); border-right-color: rgb(20, 130, 0); border-top-color: rgb(20, 130, 0); border-bottom-color: rgb(20, 130, 0); font-size: 18px; color: rgb(255, 255, 255); -unity-font-style: bold;"/>
                 </ui:VisualElement>
             </ui:VisualElement>
+            <ui:Button text="CLOSE (ESC" name="CloseButton" style="width: 200px; height: 50px; align-self: center; margin-top: 20px; background-color: rgb(200, 50, 50); border-top-left-radius: 8px; border-top-right-radius: 8px; border-bottom-right-radius: 8px; border-bottom-left-radius: 8px; -unity-font-style: bold;"/>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
