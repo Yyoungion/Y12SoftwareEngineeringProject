@@ -212,7 +212,8 @@ MonoBehaviour:
   jumpSpeed: 5
   jumpDuration: 0.5
   attackCooldown: 2
-  currencyDropAmount: 5
+  currencyDropAmount: 1
+  currencyDropVariance: 4
   xpDropAmount: 10
   player: {fileID: 0}
   animator: {fileID: 0}

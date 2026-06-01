@@ -20,6 +20,7 @@ public class SlimeEnemy : MonoBehaviour
     
     [Header("Drops")]
     public int currencyDropAmount = 5;
+    public int currencyDropVariance = 2;
     public int xpDropAmount = 10;
 
     [Header("References")]
@@ -259,16 +260,14 @@ public class SlimeEnemy : MonoBehaviour
         // Drop currency with multiplier
         if (CurrencyManager.Instance != null)
         {
-            int actualCurrency = currencyDropAmount;
-            
-            // Apply coin multiplier
-            if (PlayerController.Instance != null)
-            {
-                actualCurrency = Mathf.RoundToInt(currencyDropAmount * PlayerController.Instance.currentCoinMultiplier);
-            }
+            float coinMultiplier = PlayerController.Instance != null ? PlayerController.Instance.currentCoinMultiplier : 1f;
+            int minCurrency = Mathf.Max(1, Mathf.FloorToInt((currencyDropAmount - currencyDropVariance) * coinMultiplier));
+            int maxCurrency = Mathf.Max(minCurrency, Mathf.CeilToInt((currencyDropAmount + currencyDropVariance) * coinMultiplier));
+
+            int actualCurrency = Random.Range(minCurrency, maxCurrency + 1);
             
             CurrencyManager.Instance.AddCurrency(actualCurrency);
-            Debug.Log($"Dropped {actualCurrency} gold!");
+            Debug.Log($"Dropped {actualCurrency} gold (range {minCurrency}-{maxCurrency}, multiplier {coinMultiplier}x)!");
         }
         
         // Stop all movement

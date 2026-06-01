@@ -998,6 +998,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48a9635ad12684ba4a1a8de99d635997, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeMenuController
+  slideInOffset: 80
+  openAnimationDuration: 0.22
 --- !u!114 &1180762302
 MonoBehaviour:
   m_ObjectHideFlags: 0
