@@ -1,13 +1,11 @@
 using UnityEngine;
 using UnityEngine.UIElements;
-using System.Collections;
 
 public class UpgradeMenuController : MonoBehaviour
 {
     private UIDocument uiDocument;
     private VisualElement root;
     private VisualElement overlay;
-    private VisualElement menuContainer;
     
     private Label currentGoldLabel;
     
@@ -29,47 +27,22 @@ public class UpgradeMenuController : MonoBehaviour
     private Label coinMultiplierDescription;
     
     private bool isMenuOpen = false;
-    private Coroutine openMenuAnimation;
-    private Coroutine closeMenuAnimation;
-
-    [SerializeField] private float slideInOffset = 80f;
-    [SerializeField] private float openAnimationDuration = 0.22f;
-
-    private T QueryElement<T>(params string[] names) where T : VisualElement
-    {
-        if (root == null)
-        {
-            return null;
-        }
-
-        foreach (string name in names)
-        {
-            T element = root.Q<T>(name);
-            if (element != null)
-            {
-                return element;
-            }
-        }
-
-        return null;
-    }
     
     void Start()
     {
         uiDocument = GetComponent<UIDocument>();
         root = uiDocument.rootVisualElement;
+        overlay = root.Q<VisualElement>("Overlay") ?? root;
         
         // Find elements
         currentGoldLabel = root.Q<Label>("CurrentGoldLabel");
-        overlay = root.Q<VisualElement>("Overlay");
-        menuContainer = root.Q<VisualElement>("MenuContainer");
         
         // Find buttons
         damageUpgradeButton = root.Q<Button>("DamageUpgradeButton");
         attackSpeedUpgradeButton = root.Q<Button>("AttackSpeedUpgradeButton");
         speedUpgradeButton = root.Q<Button>("SpeedUpgradeButton");
-        defenseUpgradeButton = QueryElement<Button>("DefenseUpgradeButton", "DefenceUpgradeButton");
-        healthUpgradeButton = QueryElement<Button>("HealthUpgradeButton", "MaxHealthUpgradeButton");
+        defenseUpgradeButton = root.Q<Button>("DefenseUpgradeButton") ?? root.Q<Button>("DefenceUpgradeButton");
+        healthUpgradeButton = root.Q<Button>("HealthUpgradeButton") ?? root.Q<Button>("MaxHealthUpgradeButton");
         coinMultiplierUpgradeButton = root.Q<Button>("CoinMultiplierUpgradeButton");
         closeButton = root.Q<Button>("CloseButton");
         
@@ -77,8 +50,8 @@ public class UpgradeMenuController : MonoBehaviour
         damageDescription = root.Q<Label>("DamageDescription");
         attackSpeedDescription = root.Q<Label>("AttackSpeedDescription");
         speedDescription = root.Q<Label>("SpeedDescription");
-        defenseDescription = QueryElement<Label>("DefenseDescription", "DefenceDescription");
-        healthDescription = QueryElement<Label>("HealthDescription", "MaxHealthDescription");
+        defenseDescription = root.Q<Label>("DefenseDescription") ?? root.Q<Label>("DefenceDescription");
+        healthDescription = root.Q<Label>("HealthDescription") ?? root.Q<Label>("MaxHealthDescription");
         coinMultiplierDescription = root.Q<Label>("CoinMultiplierDescription");
         
         // Register button clicks
@@ -97,13 +70,13 @@ public class UpgradeMenuController : MonoBehaviour
         }
         
         // Start hidden
-        CloseMenu(false);
+        CloseMenu();
     }
     
     void Update()
     {
-        // Toggle menu with Tab or ESC
-        if (Input.GetKeyDown(KeyCode.Tab) || Input.GetKeyDown(KeyCode.Escape))
+        // CHANGED: Only open upgrade menu with Tab (not ESC anymore)
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
             if (isMenuOpen)
                 CloseMenu();
@@ -114,69 +87,47 @@ public class UpgradeMenuController : MonoBehaviour
     
     public void OpenMenu()
     {
-        root.style.display = DisplayStyle.Flex;
+        overlay.style.display = DisplayStyle.Flex;
         isMenuOpen = true;
-
-        if (openMenuAnimation != null)
-        {
-            StopCoroutine(openMenuAnimation);
-            openMenuAnimation = null;
-        }
-
-        if (closeMenuAnimation != null)
-        {
-            StopCoroutine(closeMenuAnimation);
-            closeMenuAnimation = null;
-        }
-
-        SetClosedVisualState();
         
-        // Pause game
-        Time.timeScale = 0f;
+        // Use PauseManager instead of directly setting Time.timeScale
+        if (PauseManager.Instance != null)
+        {
+            PauseManager.Instance.Pause();
+        }
+        else
+        {
+            Time.timeScale = 0f; // Fallback
+        }
         
         UpdateAllDisplays();
-        openMenuAnimation = StartCoroutine(AnimateOpenMenu());
         Debug.Log("Upgrade menu opened - Game paused");
     }
     
-    public void CloseMenu(bool animate = true)
+    public void CloseMenu()
     {
-        if (openMenuAnimation != null)
-        {
-            StopCoroutine(openMenuAnimation);
-            openMenuAnimation = null;
-        }
-
-        if (closeMenuAnimation != null)
-        {
-            StopCoroutine(closeMenuAnimation);
-            closeMenuAnimation = null;
-        }
-
-        if (root == null)
-        {
-            return;
-        }
-
+        overlay.style.display = DisplayStyle.None;
         isMenuOpen = false;
-        Time.timeScale = 1f;
-
-        if (!animate)
+        
+        // Use PauseManager instead of directly setting Time.timeScale
+        if (PauseManager.Instance != null)
         {
-            SetClosedVisualState();
-            root.style.display = DisplayStyle.None;
-            Debug.Log("Upgrade menu closed - Game resumed");
-            return;
+            PauseManager.Instance.Resume();
         }
-
-        closeMenuAnimation = StartCoroutine(AnimateCloseMenu());
+        else
+        {
+            Time.timeScale = 1f; // Fallback
+        }
         
         Debug.Log("Upgrade menu closed - Game resumed");
     }
     
     void UpdateAllDisplays()
     {
-        UpdateGoldDisplay(CurrencyManager.Instance.GetCurrency());
+        if (CurrencyManager.Instance != null)
+        {
+            UpdateGoldDisplay(CurrencyManager.Instance.GetCurrency());
+        }
         UpdateUpgradeButtons();
     }
     
@@ -191,123 +142,29 @@ public class UpgradeMenuController : MonoBehaviour
     void UpdateUpgradeButtons()
     {
         if (PlayerController.Instance == null) return;
-
-        // Update damage
-        if (damageDescription != null) damageDescription.text = $"Level {PlayerController.Instance.damageLevel} → +{PlayerController.Instance.damagePerUpgrade} damage per level";
-        if (damageUpgradeButton != null) damageUpgradeButton.text = $"{PlayerController.Instance.damageCost} Gold";
         
-        // Update attack speed
-        if (attackSpeedDescription != null) attackSpeedDescription.text = $"Level {PlayerController.Instance.attackSpeedLevel} → -{PlayerController.Instance.attackSpeedPerUpgrade}s cooldown";
-        if (attackSpeedUpgradeButton != null) attackSpeedUpgradeButton.text = $"{PlayerController.Instance.attackSpeedCost} Gold";
+        damageDescription.text = $"Level {PlayerController.Instance.damageLevel} → +{PlayerController.Instance.damagePerUpgrade} damage per level";
+        damageUpgradeButton.text = $"{PlayerController.Instance.damageCost} Gold";
         
-        // Update move speed
-        if (speedDescription != null) speedDescription.text = $"Level {PlayerController.Instance.speedLevel} → +{PlayerController.Instance.speedPerUpgrade} speed";
-        if (speedUpgradeButton != null) speedUpgradeButton.text = $"{PlayerController.Instance.speedCost} Gold";
+        attackSpeedDescription.text = $"Level {PlayerController.Instance.attackSpeedLevel} → -{PlayerController.Instance.attackSpeedPerUpgrade}s cooldown";
+        attackSpeedUpgradeButton.text = $"{PlayerController.Instance.attackSpeedCost} Gold";
         
-        // Update defense
-        if (defenseDescription != null) defenseDescription.text = $"Level {PlayerController.Instance.defenseLevel} → +{PlayerController.Instance.defensePerUpgrade}% damage reduction";
-        if (defenseUpgradeButton != null) defenseUpgradeButton.text = $"{PlayerController.Instance.defenseCost} Gold";
+        speedDescription.text = $"Level {PlayerController.Instance.speedLevel} → +{PlayerController.Instance.speedPerUpgrade} speed";
+        speedUpgradeButton.text = $"{PlayerController.Instance.speedCost} Gold";
         
-        // Update health
-        if (healthDescription != null) healthDescription.text = $"Level {PlayerController.Instance.healthLevel} → +{PlayerController.Instance.healthPerUpgrade} max health";
-        if (healthUpgradeButton != null) healthUpgradeButton.text = $"{PlayerController.Instance.healthCost} Gold";
+        defenseDescription.text = $"Level {PlayerController.Instance.defenseLevel} → +{PlayerController.Instance.defensePerUpgrade}% damage reduction";
+        defenseUpgradeButton.text = $"{PlayerController.Instance.defenseCost} Gold";
         
-        // Update coin multiplier
-        if (coinMultiplierDescription != null) coinMultiplierDescription.text = $"Level {PlayerController.Instance.coinMultiplierLevel} → +{PlayerController.Instance.coinMultiplierPerUpgrade * 100}% coins";
-        if (coinMultiplierUpgradeButton != null) coinMultiplierUpgradeButton.text = $"{PlayerController.Instance.coinMultiplierCost} Gold";
-    }
-
-    void SetClosedVisualState()
-    {
-        if (overlay != null)
-        {
-            overlay.style.opacity = 0f;
-        }
-
-        if (menuContainer != null)
-        {
-            menuContainer.style.translate = new Translate(
-                new Length(0f, LengthUnit.Pixel),
-                new Length(slideInOffset, LengthUnit.Pixel)
-            );
-        }
-    }
-
-    IEnumerator AnimateOpenMenu()
-    {
-        float elapsedTime = 0f;
-
-        while (elapsedTime < openAnimationDuration)
-        {
-            elapsedTime += Time.unscaledDeltaTime;
-            float normalizedTime = Mathf.Clamp01(elapsedTime / openAnimationDuration);
-            float easedTime = normalizedTime * normalizedTime * (3f - 2f * normalizedTime);
-
-            if (overlay != null)
-            {
-                overlay.style.opacity = easedTime;
-            }
-
-            if (menuContainer != null)
-            {
-                float currentOffset = Mathf.Lerp(slideInOffset, 0f, easedTime);
-                menuContainer.style.translate = new Translate(
-                    new Length(0f, LengthUnit.Pixel),
-                    new Length(currentOffset, LengthUnit.Pixel)
-                );
-            }
-
-            yield return null;
-        }
-
-        if (overlay != null)
-        {
-            overlay.style.opacity = 1f;
-        }
-
-        if (menuContainer != null)
-        {
-            menuContainer.style.translate = Translate.None();
-        }
-
-        openMenuAnimation = null;
-    }
-
-    IEnumerator AnimateCloseMenu()
-    {
-        float elapsedTime = 0f;
-
-        while (elapsedTime < openAnimationDuration)
-        {
-            elapsedTime += Time.unscaledDeltaTime;
-            float normalizedTime = Mathf.Clamp01(elapsedTime / openAnimationDuration);
-            float easedTime = normalizedTime * normalizedTime * (3f - 2f * normalizedTime);
-
-            if (overlay != null)
-            {
-                overlay.style.opacity = 1f - easedTime;
-            }
-
-            if (menuContainer != null)
-            {
-                float currentOffset = Mathf.Lerp(0f, slideInOffset, easedTime);
-                menuContainer.style.translate = new Translate(
-                    new Length(0f, LengthUnit.Pixel),
-                    new Length(currentOffset, LengthUnit.Pixel)
-                );
-            }
-
-            yield return null;
-        }
-
-        SetClosedVisualState();
-        root.style.display = DisplayStyle.None;
-        closeMenuAnimation = null;
+        healthDescription.text = $"Level {PlayerController.Instance.healthLevel} → +{PlayerController.Instance.healthPerUpgrade} max health";
+        healthUpgradeButton.text = $"{PlayerController.Instance.healthCost} Gold";
+        
+        coinMultiplierDescription.text = $"Level {PlayerController.Instance.coinMultiplierLevel} → +{PlayerController.Instance.coinMultiplierPerUpgrade * 100}% coins";
+        coinMultiplierUpgradeButton.text = $"{PlayerController.Instance.coinMultiplierCost} Gold";
     }
     
     void OnDamageUpgrade()
     {
-        if (PlayerController.Instance.UpgradeDamage())
+        if (PlayerController.Instance != null && PlayerController.Instance.UpgradeDamage())
         {
             Debug.Log("Upgraded Damage!");
             UpdateAllDisplays();
@@ -316,7 +173,7 @@ public class UpgradeMenuController : MonoBehaviour
     
     void OnAttackSpeedUpgrade()
     {
-        if (PlayerController.Instance.UpgradeAttackSpeed())
+        if (PlayerController.Instance != null && PlayerController.Instance.UpgradeAttackSpeed())
         {
             Debug.Log("Upgraded Attack Speed!");
             UpdateAllDisplays();
@@ -325,7 +182,7 @@ public class UpgradeMenuController : MonoBehaviour
     
     void OnSpeedUpgrade()
     {
-        if (PlayerController.Instance.UpgradeSpeed())
+        if (PlayerController.Instance != null && PlayerController.Instance.UpgradeSpeed())
         {
             Debug.Log("Upgraded Move Speed!");
             UpdateAllDisplays();
@@ -334,7 +191,7 @@ public class UpgradeMenuController : MonoBehaviour
     
     void OnDefenseUpgrade()
     {
-        if (PlayerController.Instance.UpgradeDefense())
+        if (PlayerController.Instance != null && PlayerController.Instance.UpgradeDefense())
         {
             Debug.Log("Upgraded Defense!");
             UpdateAllDisplays();
@@ -343,7 +200,7 @@ public class UpgradeMenuController : MonoBehaviour
     
     void OnHealthUpgrade()
     {
-        if (PlayerController.Instance.UpgradeHealth())
+        if (PlayerController.Instance != null && PlayerController.Instance.UpgradeHealth())
         {
             Debug.Log("Upgraded Max Health!");
             UpdateAllDisplays();
@@ -352,7 +209,7 @@ public class UpgradeMenuController : MonoBehaviour
     
     void OnCoinMultiplierUpgrade()
     {
-        if (PlayerController.Instance.UpgradeCoinMultiplier())
+        if (PlayerController.Instance != null && PlayerController.Instance.UpgradeCoinMultiplier())
         {
             Debug.Log("Upgraded Coin Multiplier!");
             UpdateAllDisplays();
@@ -361,13 +218,19 @@ public class UpgradeMenuController : MonoBehaviour
     
     void OnDestroy()
     {
-        // Unsubscribe
         if (CurrencyManager.Instance != null)
         {
             CurrencyManager.Instance.OnCurrencyChanged -= UpdateGoldDisplay;
         }
         
-        // Make sure game unpauses if menu is destroyed
-        Time.timeScale = 1f;
+        // Make sure game unpauses
+        if (PauseManager.Instance != null)
+        {
+            PauseManager.Instance.Resume();
+        }
+        else
+        {
+            Time.timeScale = 1f;
+        }
     }
 }

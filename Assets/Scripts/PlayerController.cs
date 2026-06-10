@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(AudioSource))]
 public class PlayerController : MonoBehaviour
 {
 	public static PlayerController Instance { get; private set; }
@@ -71,9 +72,12 @@ public class PlayerController : MonoBehaviour
 	[Header("References")]
 	[SerializeField] private GameObject attackHitbox;
 	[SerializeField] private Animator animator;
+	[SerializeField] private AudioClip attackSfx;
+	[SerializeField, Range(0f, 1f)] private float attackSfxVolume = 1f;
 
 	private Rigidbody2D rb;
 	private SpriteRenderer spriteRenderer;
+	private AudioSource audioSource;
 	private Color originalColor;
 	private Vector2 movement;
 	private Vector2 lastMovement = Vector2.down;
@@ -101,6 +105,17 @@ public class PlayerController : MonoBehaviour
 		rb = GetComponent<Rigidbody2D>();
 		animator = animator == null ? GetComponent<Animator>() : animator;
 		spriteRenderer = GetComponent<SpriteRenderer>();
+		audioSource = GetComponent<AudioSource>();
+		if (audioSource != null)
+		{
+			audioSource.playOnAwake = false;
+			audioSource.loop = false;
+			audioSource.spatialBlend = 0f;
+		}
+		if (attackSfx == null)
+		{
+			attackSfx = CreateDefaultAttackSfx();
+		}
 		originalColor = spriteRenderer.color;
 		health = Mathf.Min(health, maxHealth);
 	}
@@ -241,6 +256,8 @@ public class PlayerController : MonoBehaviour
 
 	private void Attack()
 	{
+		PlayAttackSfx();
+
 		if (animator != null)
 		{
 			// only trigger if parameter exists to avoid console warnings
@@ -266,6 +283,35 @@ public class PlayerController : MonoBehaviour
 		}
 
 		Debug.Log("Player attacking!");
+	}
+
+	private void PlayAttackSfx()
+	{
+		if (audioSource != null && attackSfx != null)
+		{
+			audioSource.PlayOneShot(attackSfx, attackSfxVolume);
+		}
+	}
+
+	private AudioClip CreateDefaultAttackSfx()
+	{
+		const int sampleRate = 44100;
+		const float durationSeconds = 0.12f;
+		int sampleCount = Mathf.CeilToInt(sampleRate * durationSeconds);
+		float[] samples = new float[sampleCount];
+
+		for (int i = 0; i < sampleCount; i++)
+		{
+			float normalizedTime = (float)i / sampleRate;
+			float envelope = Mathf.Exp(-normalizedTime * 28f);
+			float noise = Random.Range(-1f, 1f);
+			float tone = Mathf.Sin(2f * Mathf.PI * 140f * normalizedTime);
+			samples[i] = (noise * 0.7f + tone * 0.3f) * envelope * 0.4f;
+		}
+
+		AudioClip clip = AudioClip.Create("DefaultAttackSfx", sampleCount, 1, sampleRate, false);
+		clip.SetData(samples, 0);
+		return clip;
 	}
 
 	private System.Collections.IEnumerator DamageFlash()
