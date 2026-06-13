@@ -289,8 +289,16 @@ public class PlayerController : MonoBehaviour
 	{
 		if (audioSource != null && attackSfx != null)
 		{
-			audioSource.PlayOneShot(attackSfx, attackSfxVolume);
+			float masterVolume = SettingsMenuController.MasterVolumePercent / 100f;
+			float sfxVolume = SettingsMenuController.SfxVolumePercent / 100f;
+			float finalVolume = Mathf.Clamp01(attackSfxVolume * masterVolume * sfxVolume);
+			audioSource.PlayOneShot(attackSfx, finalVolume);
 		}
+	}
+
+	public void SetAttackSfxVolume(float volume)
+	{
+		attackSfxVolume = Mathf.Clamp01(volume);
 	}
 
 	private AudioClip CreateDefaultAttackSfx()

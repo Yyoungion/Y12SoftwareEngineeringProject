@@ -1,10 +1,14 @@
-using System;
-using System.Reflection;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 public class SettingsMenuController : MonoBehaviour
 {
+    private const float DefaultVolumePercent = 50f;
+
+    public static float MasterVolumePercent { get; private set; } = DefaultVolumePercent;
+    public static float MusicVolumePercent { get; private set; } = DefaultVolumePercent;
+    public static float SfxVolumePercent { get; private set; } = DefaultVolumePercent;
+
     private UIDocument uiDocument;
     private VisualElement root;
     private VisualElement overlay;
@@ -51,20 +55,24 @@ public class SettingsMenuController : MonoBehaviour
         if (masterVolumeSlider != null)
         {
             masterVolumeSlider.RegisterValueChangedCallback(evt => OnMasterVolumeChanged(evt.newValue));
-            masterVolumeSlider.value = GetAudioManagerFloat("masterVolume", 1f);
+            masterVolumeSlider.SetValueWithoutNotify(MasterVolumePercent);
         }
         
         if (musicVolumeSlider != null)
         {
             musicVolumeSlider.RegisterValueChangedCallback(evt => OnMusicVolumeChanged(evt.newValue));
-            musicVolumeSlider.value = GetAudioManagerFloat("musicVolume", 0.7f);
+            musicVolumeSlider.SetValueWithoutNotify(MusicVolumePercent);
         }
         
         if (sfxVolumeSlider != null)
         {
             sfxVolumeSlider.RegisterValueChangedCallback(evt => OnSFXVolumeChanged(evt.newValue));
-            sfxVolumeSlider.value = GetAudioManagerFloat("sfxVolume", 0.8f);
+            sfxVolumeSlider.SetValueWithoutNotify(SfxVolumePercent);
         }
+
+        ApplyMasterVolume(MasterVolumePercent);
+        ApplyMusicVolume(MusicVolumePercent);
+        ApplySfxVolume(SfxVolumePercent);
         
         // Register difficulty buttons
         easyButton?.RegisterCallback<ClickEvent>(evt => SetDifficulty("Easy"));
@@ -80,94 +88,40 @@ public class SettingsMenuController : MonoBehaviour
     
     void OnMasterVolumeChanged(float value)
     {
-        InvokeAudioManagerMethod("SetMasterVolume", value);
+        MasterVolumePercent = Mathf.Clamp(value, 0f, 100f);
+        ApplyMasterVolume(MasterVolumePercent);
     }
     
     void OnMusicVolumeChanged(float value)
     {
-        InvokeAudioManagerMethod("SetMusicVolume", value);
+        MusicVolumePercent = Mathf.Clamp(value, 0f, 100f);
+        ApplyMusicVolume(MusicVolumePercent);
     }
     
     void OnSFXVolumeChanged(float value)
     {
-        InvokeAudioManagerMethod("SetSFXVolume", value);
+        SfxVolumePercent = Mathf.Clamp(value, 0f, 100f);
+        ApplySfxVolume(SfxVolumePercent);
     }
 
-    private float GetAudioManagerFloat(string propertyName, float fallbackValue)
+    private static float PercentToNormalized(float percent)
     {
-        object audioManager = GetAudioManagerInstance();
-        if (audioManager == null)
-        {
-            return fallbackValue;
-        }
-
-        PropertyInfo propertyInfo = audioManager.GetType().GetProperty(propertyName, BindingFlags.Instance | BindingFlags.Public);
-        if (propertyInfo != null && propertyInfo.PropertyType == typeof(float))
-        {
-            object propertyValue = propertyInfo.GetValue(audioManager);
-            if (propertyValue is float floatValue)
-            {
-                return floatValue;
-            }
-        }
-
-        return fallbackValue;
+        return Mathf.Clamp01(percent / 100f);
     }
 
-    private void InvokeAudioManagerMethod(string methodName, float value)
+    private void ApplyMasterVolume(float percent)
     {
-        object audioManager = GetAudioManagerInstance();
-        if (audioManager == null)
-        {
-            return;
-        }
-
-        MethodInfo methodInfo = audioManager.GetType().GetMethod(methodName, BindingFlags.Instance | BindingFlags.Public);
-        methodInfo?.Invoke(audioManager, new object[] { value });
+        MasterVolumePercent = Mathf.Clamp(percent, 0f, 100f);
     }
 
-    private object GetAudioManagerInstance()
+    private void ApplyMusicVolume(float percent)
     {
-        Type audioManagerType = FindTypeByName("AudioManager");
-        if (audioManagerType == null)
-        {
-            return null;
-        }
-
-        PropertyInfo instanceProperty = audioManagerType.GetProperty("Instance", BindingFlags.Static | BindingFlags.Public);
-        return instanceProperty?.GetValue(null);
+        MusicVolumePercent = Mathf.Clamp(percent, 0f, 100f);
     }
 
-    private Type FindTypeByName(string typeName)
+    private void ApplySfxVolume(float percent)
     {
-        foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
-        {
-            Type type = assembly.GetType(typeName);
-            if (type != null)
-            {
-                return type;
-            }
-
-            Type[] assemblyTypes;
-            try
-            {
-                assemblyTypes = assembly.GetTypes();
-            }
-            catch (ReflectionTypeLoadException exception)
-            {
-                assemblyTypes = exception.Types;
-            }
-
-            foreach (Type candidate in assemblyTypes)
-            {
-                if (candidate != null && candidate.Name == typeName)
-                {
-                    return candidate;
-                }
-            }
-        }
-
-        return null;
+        SfxVolumePercent = Mathf.Clamp(percent, 0f, 100f);
     }
     
     void SetDifficulty(string difficulty)
@@ -210,9 +164,17 @@ public class SettingsMenuController : MonoBehaviour
     void ResetToDefault()
     {
         // Reset volumes
-        if (masterVolumeSlider != null) masterVolumeSlider.value = 1f;
-        if (musicVolumeSlider != null) musicVolumeSlider.value = 0.7f;
-        if (sfxVolumeSlider != null) sfxVolumeSlider.value = 0.8f;
+        if (masterVolumeSlider != null) masterVolumeSlider.SetValueWithoutNotify(DefaultVolumePercent);
+        if (musicVolumeSlider != null) musicVolumeSlider.SetValueWithoutNotify(DefaultVolumePercent);
+        if (sfxVolumeSlider != null) sfxVolumeSlider.SetValueWithoutNotify(DefaultVolumePercent);
+
+        MasterVolumePercent = DefaultVolumePercent;
+        MusicVolumePercent = DefaultVolumePercent;
+        SfxVolumePercent = DefaultVolumePercent;
+
+        ApplyMasterVolume(MasterVolumePercent);
+        ApplyMusicVolume(MusicVolumePercent);
+        ApplySfxVolume(SfxVolumePercent);
         
         // Reset difficulty
         SetDifficulty("Normal");
