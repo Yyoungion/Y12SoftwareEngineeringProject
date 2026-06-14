@@ -58,6 +58,7 @@ public class PlayerController : MonoBehaviour
 	public float attackRange = 1.5f;
 	public float attackCooldown = 0.5f;
 	public LayerMask enemyLayer;
+	public LayerMask obstacleLayers;
 
 	[Header("Health")]
 	public float health = 100f;
@@ -115,6 +116,10 @@ public class PlayerController : MonoBehaviour
 		if (attackSfx == null)
 		{
 			attackSfx = CreateDefaultAttackSfx();
+		}
+		if (obstacleLayers.value == 0)
+		{
+			obstacleLayers = LayerMask.GetMask("Wall");
 		}
 		originalColor = spriteRenderer.color;
 		health = Mathf.Min(health, maxHealth);
@@ -275,6 +280,18 @@ public class PlayerController : MonoBehaviour
 
 		foreach (Collider2D enemy in hitEnemies)
 		{
+			if (enemy == null)
+			{
+				continue;
+			}
+
+			Vector2 targetPoint = enemy.bounds.center;
+			RaycastHit2D obstacleHit = Physics2D.Linecast(transform.position, targetPoint, obstacleLayers);
+			if (obstacleHit.collider != null)
+			{
+				continue;
+			}
+
 			SlimeEnemy slime = enemy.GetComponentInParent<SlimeEnemy>();
 			if (slime != null)
 			{

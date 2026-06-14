@@ -85,6 +85,14 @@ public class SettingsMenuController : MonoBehaviour
         // Start hidden
         CloseSettings();
     }
+
+    void Update()
+    {
+        if (isOpen && Input.GetKeyDown(KeyCode.Escape))
+        {
+            CloseSettings();
+        }
+    }
     
     void OnMasterVolumeChanged(float value)
     {
