@@ -73,6 +73,15 @@ public class MainMenuUIController : MonoBehaviour
     {
         // Prints a message to the Console for debugging.
         Debug.Log("Options button clicked!");
-        // Add options menu logic here later
+
+        SettingsMenuController settingsMenu = FindFirstObjectByType<SettingsMenuController>();
+        if (settingsMenu != null)
+        {
+            settingsMenu.OpenSettings();
+        }
+        else
+        {
+            Debug.LogWarning("SettingsMenuController not found!");
+        }
     }
 }

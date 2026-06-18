@@ -377,7 +377,17 @@ public class PlayerController : MonoBehaviour
 	private void Die()
 	{
 		Debug.Log("Player died!");
-		Destroy(gameObject, 1f);
+    // Trigger death sequence with falling slimes
+		if (DeathSequenceManager.Instance != null)
+		{
+			DeathSequenceManager.Instance.StartDeathSequence();
+		}
+		else
+		{
+			Debug.LogWarning("DeathSequenceManager not found!");
+		}
+		
+		this.enabled = false;
 	}
 
 	public void RecalculateStats()

@@ -93,7 +93,7 @@ public class PauseMenuController : MonoBehaviour
         ClosePauseMenu();
         
         // Find and open settings menu
-        SettingsMenuController settingsMenu = FindObjectOfType<SettingsMenuController>();
+        SettingsMenuController settingsMenu = FindFirstObjectByType<SettingsMenuController>();
         if (settingsMenu != null)
         {
             settingsMenu.OpenSettings();
@@ -117,7 +117,7 @@ public class PauseMenuController : MonoBehaviour
         }
         
         // Load main menu
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("MainMenuScene");
     }
     
     void OnDestroy()

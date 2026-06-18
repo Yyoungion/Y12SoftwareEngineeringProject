@@ -161,7 +161,7 @@ public class SettingsMenuController : MonoBehaviour
                 easyButton.style.backgroundColor = new Color(0.2f, 0.8f, 0.2f);
                 break;
             case "Normal":
-                normalButton.style.backgroundColor = new Color(0.2f, 0.8f, 0.2f);
+                normalButton.style.backgroundColor = new Color(1f, 0.55f, 0.1f);
                 break;
             case "Hard":
                 hardButton.style.backgroundColor = new Color(0.8f, 0.2f, 0.2f);
