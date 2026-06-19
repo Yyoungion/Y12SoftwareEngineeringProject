@@ -141,7 +141,7 @@ public class PlayerController : MonoBehaviour
 			lastAttackTime = Time.time;
 		}
 
-		 if (Input.GetKeyDown(healKey))
+		if (Input.GetKeyDown(healKey))
 		{
 			TryHeal();
 		}
@@ -376,20 +376,19 @@ public class PlayerController : MonoBehaviour
 
 	private void Die()
 	{
+		Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, attackRange, enemyLayer);
+		foreach (Collider2D enemy in hitEnemies)
+		{
+			SlimeEnemy slime = enemy.GetComponentInParent<SlimeEnemy>();
+			if (slime != null)
+			{
+				slime.TakeDamage(1000f);
+			}
+		}
+		animator.SetTrigger("Death");
 		Debug.Log("Player died!");
-    // Trigger death sequence with falling slimes
-		if (DeathSequenceManager.Instance != null)
-		{
-			DeathSequenceManager.Instance.StartDeathSequence();
-		}
-		else
-		{
-			Debug.LogWarning("DeathSequenceManager not found!");
-		}
-		
-		this.enabled = false;
-	}
 
+	}
 	public void RecalculateStats()
 	{
 		currentAttackDamage = baseAttackDamage + (damageLevel * damagePerUpgrade);
