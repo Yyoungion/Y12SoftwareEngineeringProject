@@ -110,7 +110,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 6200000, guid: 81b02a5111b0442bbbc3dd83ba019fe2, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
@@ -204,7 +204,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SlimeEnemy
   health: 60
   maxHealth: 50
-  attackDamage: 5
+  attackDamage: 30
   walkSpeed: 2
   detectionRange: 1000
   stopDistance: 2
