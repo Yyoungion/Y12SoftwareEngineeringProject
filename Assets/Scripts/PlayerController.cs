@@ -376,6 +376,8 @@ public class PlayerController : MonoBehaviour
 
 	private void Die()
 	{
+		//disable movement and attacks immediately
+		this.enabled = false;
 		Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(transform.position, attackRange, enemyLayer);
 		foreach (Collider2D enemy in hitEnemies)
 		{
@@ -386,6 +388,18 @@ public class PlayerController : MonoBehaviour
 			}
 		}
 		animator.SetTrigger("Death");
+		//wait for 1 seconds to allow death animation to play before showing death screen and destroying player
+		Invoke(nameof(ShowDeathScreenAndDestroy), 1f);
+	}
+
+	private void ShowDeathScreenAndDestroy()
+	{
+		DeathScreenController deathScreen = FindObjectOfType<DeathScreenController>();
+    	if (deathScreen != null)
+		{
+			deathScreen.ShowDeathScreen();
+		}
+		Destroy(gameObject);
 		Debug.Log("Player died!");
 
 	}
