@@ -167,7 +167,7 @@ MonoBehaviour:
   enemiesPerWave: 5
   timeBetweenWaves: 10
   enemiesPerWaveMultiplier: 1.5
-  slimePrefab: {fileID: 0}
+  slimePrefab: {fileID: 3528304491443739896, guid: 3a14a009de1b3964eacb43e462e595b0, type: 3}
   spawnPoints: []
   spawnDelay: 0.5
 --- !u!4 &429648384 stripped
@@ -1063,7 +1063,7 @@ MonoBehaviour:
   enemiesPerWave: 5
   timeBetweenWaves: 10
   enemiesPerWaveMultiplier: 0
-  slimePrefab: {fileID: 0}
+  slimePrefab: {fileID: 3528304491443739896, guid: 3a14a009de1b3964eacb43e462e595b0, type: 3}
   spawnPoints: []
   spawnDelay: 0.5
 --- !u!1 &1180762299
@@ -1309,7 +1309,7 @@ MonoBehaviour:
   enemiesPerWave: 5
   timeBetweenWaves: 10
   enemiesPerWaveMultiplier: 1.5
-  slimePrefab: {fileID: 0}
+  slimePrefab: {fileID: 3528304491443739896, guid: 3a14a009de1b3964eacb43e462e595b0, type: 3}
   spawnPoints: []
   spawnDelay: 0.5
 --- !u!1 &1527020457

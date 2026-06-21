@@ -275,16 +275,12 @@ public class SlimeEnemy : MonoBehaviour
         isWalking = false;
         if (rb != null) rb.linearVelocity = Vector2.zero;
         
+        this.enabled = false;
         // Play death animation
         if (animator != null)
         {
             animator.SetTrigger("Die");
         }
-        
-        // Disable this script
-        this.enabled = false;
-        
-        // Destroy after delay
         Destroy(gameObject, 1f);
     }
         
