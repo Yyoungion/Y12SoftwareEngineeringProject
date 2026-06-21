@@ -6,8 +6,9 @@ public class WaveManager : MonoBehaviour
     [Header("Wave Settings")]
     public int currentWave = 0;
     public int enemiesPerWave = 5;
-    public float enemiesPerWaveMultiplier = 1.5f;
     public float timeBetweenWaves = 10f;
+
+    public float enemiesPerWaveMultiplier = 1f; // Base multiplier, can be overridden by DifficultyManager
     
     [Header("Spawning")]
     public GameObject slimePrefab;
@@ -40,25 +41,30 @@ public class WaveManager : MonoBehaviour
     
     IEnumerator StartNextWave()
     {
-        // Wait between waves
         Debug.Log($"Next wave in {timeBetweenWaves} seconds...");
         yield return new WaitForSeconds(timeBetweenWaves);
         
-        // Start new wave
         currentWave++;
-        enemiesRemainingInWave = Mathf.RoundToInt(enemiesPerWave * Mathf.Pow(enemiesPerWaveMultiplier, currentWave - 1));
+        
+        // Get multiplier from difficulty
+        float waveMultiplier = enemiesPerWaveMultiplier;
+        if (DifficultyManager.Instance != null)
+        {
+            waveMultiplier = DifficultyManager.Instance.GetEnemiesPerWaveMultiplier();
+        }
+        
+        enemiesRemainingInWave = Mathf.RoundToInt(enemiesPerWave * Mathf.Pow(waveMultiplier, currentWave - 1));
         
         Debug.Log($"=== WAVE {currentWave} START === ({enemiesRemainingInWave} enemies)");
         waveActive = true;
         
-        // Spawn enemies
         for (int i = 0; i < enemiesRemainingInWave; i++)
         {
             SpawnEnemy();
             yield return new WaitForSeconds(spawnDelay);
         }
     }
-    
+
     void SpawnEnemy()
     {
         if (slimePrefab == null || spawnPoints.Length == 0)
@@ -67,10 +73,17 @@ public class WaveManager : MonoBehaviour
             return;
         }
         
-        // Pick random spawn point
         Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+        GameObject slimeInstance = Instantiate(slimePrefab, spawnPoint.position, Quaternion.identity);
         
-        // Spawn enemy
-        Instantiate(slimePrefab, spawnPoint.position, Quaternion.identity);
+        // Apply difficulty to new enemy
+        if (DifficultyManager.Instance != null)
+        {
+            SlimeEnemy slimeAI = slimeInstance.GetComponent<SlimeEnemy>();
+            if (slimeAI != null)
+            {
+                DifficultyManager.Instance.UpdateEnemyForDifficulty(slimeAI);
+            }
+        }
     }
 }

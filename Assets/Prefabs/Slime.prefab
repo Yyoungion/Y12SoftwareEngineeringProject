@@ -204,7 +204,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SlimeEnemy
   health: 60
   maxHealth: 50
-  attackDamage: 30
+  attackDamage: 5
   walkSpeed: 2
   detectionRange: 1000
   stopDistance: 2

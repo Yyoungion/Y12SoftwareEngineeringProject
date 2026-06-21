@@ -165,8 +165,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WaveManager
   currentWave: 0
   enemiesPerWave: 5
-  enemiesPerWaveMultiplier: 1.5
   timeBetweenWaves: 10
+  enemiesPerWaveMultiplier: 1.5
   slimePrefab: {fileID: 0}
   spawnPoints: []
   spawnDelay: 0.5
@@ -549,8 +549,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WaveManager
   currentWave: 0
   enemiesPerWave: 5
-  enemiesPerWaveMultiplier: 1.5
   timeBetweenWaves: 10
+  enemiesPerWaveMultiplier: 1.5
   slimePrefab: {fileID: 3528304491443739896, guid: 3a14a009de1b3964eacb43e462e595b0, type: 3}
   spawnPoints: []
   spawnDelay: 0.5
@@ -1061,8 +1061,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WaveManager
   currentWave: 0
   enemiesPerWave: 5
-  enemiesPerWaveMultiplier: 1.5
   timeBetweenWaves: 10
+  enemiesPerWaveMultiplier: 0
   slimePrefab: {fileID: 0}
   spawnPoints: []
   spawnDelay: 0.5
@@ -1252,8 +1252,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WaveManager
   currentWave: 0
   enemiesPerWave: 5
-  enemiesPerWaveMultiplier: 1.5
   timeBetweenWaves: 10
+  enemiesPerWaveMultiplier: 1.5
   slimePrefab: {fileID: 3528304491443739896, guid: 3a14a009de1b3964eacb43e462e595b0, type: 3}
   spawnPoints:
   - {fileID: 640596002}
@@ -1270,6 +1270,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1400295759}
+  - component: {fileID: 1400295760}
   m_Layer: 0
   m_Name: GameObject (1)
   m_TagString: Untagged
@@ -1292,6 +1293,25 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1356988197}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1400295760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1400295758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0852c5ed0068eb4883ddefbe22b24a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WaveManager
+  currentWave: 0
+  enemiesPerWave: 5
+  timeBetweenWaves: 10
+  enemiesPerWaveMultiplier: 1.5
+  slimePrefab: {fileID: 0}
+  spawnPoints: []
+  spawnDelay: 0.5
 --- !u!1 &1527020457
 GameObject:
   m_ObjectHideFlags: 0
@@ -1360,6 +1380,60 @@ MonoBehaviour:
   m_PivotReferenceSize: 0
   m_Pivot: 0
   m_WorldSpaceCollider: {fileID: 0}
+--- !u!1 &1555884478
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1555884480}
+  - component: {fileID: 1555884479}
+  m_Layer: 0
+  m_Name: DifficultyManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1555884479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1555884478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca0aad59bd83cbe4f8bccadb0713520c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DifficultyManager
+  currentDifficulty: 1
+  easyEnemyHealthMultiplier: 0.7
+  easyEnemyDamageMultiplier: 0.6
+  easyEnemiesPerWaveMultiplier: 1.2
+  normalEnemyHealthMultiplier: 1
+  normalEnemyDamageMultiplier: 1
+  normalEnemiesPerWaveMultiplier: 1.5
+  hardEnemyHealthMultiplier: 1.5
+  hardEnemyDamageMultiplier: 1.4
+  hardEnemiesPerWaveMultiplier: 2
+--- !u!4 &1555884480
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1555884478}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.19905, y: 0.03754, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1558041806
 GameObject:
   m_ObjectHideFlags: 0
@@ -85069,3 +85143,4 @@ SceneRoots:
   - {fileID: 1558041807}
   - {fileID: 720667203}
   - {fileID: 934007283}
+  - {fileID: 1555884480}
