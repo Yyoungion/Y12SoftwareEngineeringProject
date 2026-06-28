@@ -1,12 +1,22 @@
-<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement name="Overlay" style="flex-grow: 1; width: 100%; height: 100%; position: absolute; background-color: rgb(0, 0, 0);">
-        <ui:VisualElement name="DeathScreenContainer" style="flex-grow: 1; align-items: center; justify-content: center; font-size: 14px;">
-            <ui:Label text="YOU DIED" name="DeathTitleLabel" style="font-size: 80px; color: rgb(200, 50, 50); -unity-font-style: bold; text-shadow: 3px 3px 4px rgb(200, 50, 50);"/>
-            <ui:Label text="Wave: 5" name="WaveLabel" style="font-size: 36px; color: rgb(255, 215, 0); margin-bottom: 15px;"/>
-            <ui:Label text="Gold Earned: 1250" name="GoldLabel" style="background-color: rgb(0, 0, 0); font-size: 36px; color: rgb(255, 255, 255); margin-bottom: 40px;"/>
-            <ui:VisualElement name="ButtonContainer" style="flex-grow: 1; flex-direction: row; height: 50px;">
-                <ui:Button text="Play Again" name="PlayAgainButton" style="width: 300px; height: 70px; margin-right: 20px; background-color: rgb(50, 200, 100); border-top-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px; border-top-width: 3px; border-right-width: 3px; border-bottom-width: 3px; border-left-width: 3px; border-left-color: rgb(30, 150, 60); border-right-color: rgb(30, 150, 60); border-top-color: rgb(30, 150, 60); border-bottom-color: rgb(30, 150, 60); -unity-font-style: bold; font-size: 32px; color: rgb(255, 255, 255);"/>
-                <ui:Button text="Quit" name="QuitButton" style="width: 300px; height: 70px; margin-right: 20px; background-color: rgb(200, 50, 50); border-top-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px; border-top-width: 3px; border-right-width: 3px; border-bottom-width: 3px; border-left-width: 3px; border-left-color: rgb(100, 29, 29); border-right-color: rgb(100, 29, 29); border-top-color: rgb(100, 29, 29); border-bottom-color: rgb(100, 29, 29); -unity-font-style: bold; font-size: 32px; color: rgb(255, 255, 255);"/>
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <ui:VisualElement name="DeathScreenOverlay" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0.8); justify-content: center; align-items: center;">
+        <ui:VisualElement name="DeathContainer" style="background-color: rgba(40, 20, 20, 0.95); padding: 40px; border-radius: 10px; width: 500px; border: 3px solid rgb(255, 50, 50);">
+            
+            <ui:Label text="YOU DIED" name="DeathTitleLabel" style="font-size: 48px; color: rgb(255, 50, 50); -unity-text-align: upper-center; margin-bottom: 30px; -unity-font-style: bold;" />
+            
+            <ui:Label text="Player: PlayerName" name="PlayerNameLabel" style="font-size: 18px; color: rgb(200, 200, 200); margin-bottom: 20px; -unity-text-align: middle-center;" />
+            
+            <ui:Label text="Wave Reached: 5" name="WaveLabel" style="font-size: 24px; color: rgb(100, 200, 255); margin-bottom: 15px; -unity-text-align: middle-center; -unity-font-style: bold;" />
+            
+            <ui:Label text="Gold Earned: 1,250" name="GoldLabel" style="font-size: 20px; color: rgb(255, 215, 0); margin-bottom: 20px; -unity-text-align: middle-center;" />
+            
+            <ui:Label text="Best Wave: 5" name="HighScoreLabel" style="font-size: 22px; color: rgb(100, 200, 255); margin-bottom: 10px; -unity-text-align: middle-center; -unity-font-style: bold;" />
+            
+            <ui:Label text=" PERSONAL BEST! " name="NewHighScoreLabel" style="font-size: 20px; color: rgb(255, 215, 0); margin-bottom: 30px; -unity-text-align: middle-center; -unity-font-style: bold; display: none;" />
+            
+            <ui:VisualElement name="ButtonContainer" style="flex-direction: row; gap: 15px;">
+                <ui:Button text="PLAY AGAIN" name="PlayAgainButton" style="flex: 1; height: 45px; font-size: 18px; background-color: rgb(100, 150, 255);" />
+                <ui:Button text="BACK TO MENU" name="QuitButton" style="flex: 1; height: 45px; font-size: 18px; background-color: rgb(100, 100, 100);" />
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>

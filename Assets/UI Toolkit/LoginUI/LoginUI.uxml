@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui:UXML
+    xmlns:ui="UnityEngine.UIElements"
+    xmlns:uie="UnityEditor.UIElements"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="UnityEngine.UIElements https://schemas.unity3d.com/2021.1/UIElements/UnityEngine.UIElements.xsd UnityEditor.UIElements https://schemas.unity3d.com/2023.2/UIElements/UnityEditor.UIElements.xsd">
+    <ui:VisualElement name="LoginContainer" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0.9); justify-content: center; align-items: center;">
+        <ui:VisualElement name="LoginBox" style="background-color: rgb(40, 40, 50); width: 450px; padding: 30px; border-radius: 10px; border-left-width: 2px; border-right-width: 2px; border-top-width: 2px; border-bottom-width: 2px; border-left-color: rgb(100, 150, 255); border-right-color: rgb(100, 150, 255); border-top-color: rgb(100, 150, 255); border-bottom-color: rgb(100, 150, 255);">
+            <ui:Label text="SURVIVAL ARENA" name="Title" style="font-size: 32px; color: rgb(100, 150, 255); -unity-text-align: upper-center; margin-bottom: 30px; -unity-font-style: bold;" />
+            
+            <!-- Login Panel -->
+            <ui:VisualElement name="LoginPanel">
+                <ui:Label text="LOGIN" style="font-size: 20px; color: rgb(200, 200, 200); margin-bottom: 20px;" />
+                
+                <ui:TextField picking-mode="Ignore" label="Player Name" name="LoginPlayerNameField" style="margin-bottom: 15px; font-size: 16px; padding: 10px; background-color: rgb(50, 50, 60); border-radius: 5px;" />
+                
+                <ui:TextField picking-mode="Ignore" label="Password" name="LoginPasswordField" password="true" style="margin-bottom: 15px; font-size: 16px; padding: 10px; background-color: rgb(50, 50, 60); border-radius: 5px;" />
+                
+                <ui:Button text="LOGIN" name="LoginButton" style="height: 40px; font-size: 16px; margin-bottom: 10px; background-color: rgb(100, 150, 255); padding: 10px; border-radius: 5px;" />
+                
+                <ui:Button text="CREATE NEW ACCOUNT" name="CreateNewButton" style="height: 40px; font-size: 14px; background-color: rgb(80, 120, 200); padding: 10px; border-radius: 5px;" />
+            </ui:VisualElement>
+            
+            <!-- Create Panel -->
+            <ui:VisualElement name="CreatePanel" style="display: none;">
+                <ui:Label text="CREATE NEW ACCOUNT" style="font-size: 20px; color: rgb(200, 200, 200); margin-bottom: 20px;" />
+                
+                <ui:TextField picking-mode="Ignore" label="Player Name" name="CreatePlayerNameField" style="margin-bottom: 15px; font-size: 16px; padding: 10px; background-color: rgb(50, 50, 60); border-radius: 5px;" />
+                
+                <ui:TextField picking-mode="Ignore" label="Password" name="CreatePasswordField" password="true" style="margin-bottom: 15px; font-size: 16px; padding: 10px; background-color: rgb(50, 50, 60); border-radius: 5px;" />
+                
+                <ui:TextField picking-mode="Ignore" label="Confirm Password" name="ConfirmPasswordField" password="true" style="margin-bottom: 15px; font-size: 16px; padding: 10px; background-color: rgb(50, 50, 60); border-radius: 5px;" />
+                
+                <ui:Label text="Password must be at least 6 characters" style="font-size: 12px; color: rgb(150, 150, 150); margin-bottom: 15px;" />
+                
+                <ui:Button text="CREATE ACCOUNT" name="CreateButton" style="height: 40px; font-size: 16px; margin-bottom: 10px; background-color: rgb(100, 200, 100); padding: 10px; border-radius: 5px;" />
+                
+                <ui:Button text="BACK" name="BackButton" style="height: 40px; font-size: 14px; background-color: rgb(100, 100, 100); padding: 10px; border-radius: 5px;" />
+            </ui:VisualElement>
+            
+            <!-- Error Message -->
+            <ui:Label name="ErrorMessage" text="" style="color: rgb(255, 100, 100); margin-top: 15px; -unity-text-align: middle-center; white-space: normal; font-size: 14px;" />
+        </ui:VisualElement>
+    </ui:VisualElement>  
+</ui:UXML>

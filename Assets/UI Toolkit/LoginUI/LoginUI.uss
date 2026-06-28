@@ -1,0 +1,50 @@
+LoginUI {
+    font-size: 16px;
+}
+
+#LoginContainer {
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+#LoginBox {
+    background-color: rgb(35, 35, 45);
+    border-left-width: 3px;
+    border-right-width: 3px;
+    border-top-width: 3px;
+    border-bottom-width: 3px;
+    border-left-color: rgb(100, 150, 255);
+    border-right-color: rgb(100, 150, 255);
+    border-top-color: rgb(100, 150, 255);
+    border-bottom-color: rgb(100, 150, 255);
+}
+
+TextField {
+    font-size: 14px;
+    padding: 10px;
+    background-color: rgb(50, 50, 60);
+    border-radius: 5px;
+}
+
+TextField:focus {
+    border-left-width: 2px;
+    border-right-width: 2px;
+    border-top-width: 2px;
+    border-bottom-width: 2px;
+    border-left-color: rgb(150, 200, 255);
+    border-right-color: rgb(150, 200, 255);
+    border-top-color: rgb(150, 200, 255);
+    border-bottom-color: rgb(150, 200, 255);
+}
+
+Button {
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    -unity-font-style: bold;
+    border: none;
+    cursor: pointer;
+}
+
+Button:hover {
+    opacity: 1.2;
+}
