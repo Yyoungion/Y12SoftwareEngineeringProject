@@ -920,15 +920,49 @@ Result: PASS
     - Multiple levels/arenas
     - Boss story arcs
 
+## 5.5 Evaluation of Social, Ethical and Legal Issues
+
+### Social Issues
+
+The main positive social impact of the project is that it provides students with a structured break activity that does not rely on social media, advertisements, online competition, or paid content. This supports the project goal of giving players a quick mental reset between study sessions. The game is easy to start, uses simple controls, and avoids permanent progression systems, which makes it more suitable for short play sessions rather than encouraging long periods of continuous play.
+
+The project also considers social pressure. Multiplayer, leaderboards, online rankings, and public profiles were not included because these features can make players compare themselves with others. For a game aimed at stress relief, this could increase pressure instead of reducing it. Keeping the game single-player allows the player to enjoy the challenge privately and at their own pace.
+
+However, there are still social risks. Any game can become a distraction if it is used during class time, late at night, or instead of completing school work. The project reduces this risk by focusing on arcade-style sessions rather than long-term rewards, but it cannot fully control how users choose to play. If the project were expanded, a session timer or optional reminder after a set amount of play time could help encourage healthier use.
+
+Accessibility is another social issue. The game includes difficulty options so players with different skill levels can participate, and UI readability was improved after testing. This makes the game more inclusive. Further improvements could include remappable controls, colour-blind friendly visual effects, subtitles or captions for important audio feedback, and more settings for players with motor or visual needs.
+
+### Ethical Issues
+
+The most important ethical responsibility in this project is to avoid exploitative design. Many free games use advertisements, microtransactions, daily rewards, limited-time content, or random loot systems to keep users playing or spending money. These features were excluded because they would conflict with the purpose of helping students relax. The upgrade system only affects the current run and does not pressure the player to return every day or pay for advantages.
+
+Another ethical consideration is player wellbeing. The game uses combat and survival mechanics, but the violence is stylised and simple rather than graphic or realistic. This makes it more age-appropriate for the intended school context. The difficulty also needs to feel fair. If the game becomes too punishing, it could create frustration instead of stress relief. Testing and difficulty balancing were therefore important ethical design decisions because they helped make the experience challenging without being unfair.
+
+Privacy was also considered. The current version does not collect personal information, account details, location data, chat messages, payment information, or analytics. This is ethically appropriate because the game does not need that data to function. Collecting unnecessary data from students would create avoidable privacy risks. If features such as save files, online scores, or analytics were added later, only the minimum required data should be collected, and users should be clearly informed about what is stored and why.
+
+### Legal Issues
+
+Software licensing also to the Unity engine and any external packages. The project must follow Unity's terms of use and the licence conditions of any packages included through the Unity Package Manager or asset store. If the game were published outside of school, I would need to confirm that the Unity licence, package licences, and asset licences all allow that type of release.
+
+Privacy law is a lower risk in the current version because the game is local-only and does not collect personal data. This reduces obligations related to storing, protecting, or deleting user information. If future versions added accounts, online leaderboards, analytics, cloud saves, or multiplayer chat, the project would need a privacy policy and stronger data protection measures.
+
+Classification and age-appropriateness are also relevant. The game contains stylised combat against enemies, so it should be presented honestly as an arcade survival game rather a graphical combat game. If published, I may need to check platform age-rating requirements and content guidelines. The current design avoids realistic violence, gambling mechanics, paid loot boxes, and online communication, which lowers legal and classification risk.
+
 # 6. FEEDBACK, SECURITY AND REFLECTION
 
 ## 6.1 Summary of QA & Stakeholder Feedback
 
 ### Feedback Collection Methodology
 
-PMTANG
+Feedback was collected from student playtesters after short 15-20 minute play sessions. Testers were asked to record positive feedback, negative feedback, and the implication of that feedback for future development. This made the feedback easier to evaluate because each comment could be connected to a design decision or improvement.
 
-Throughout testing, several key issues were identified and resolved to improve gameplay, accessibility, and user experience. The highest-priority issue was difficulty balancing, where Hard mode had no one make it past round 5 due to early enemy damage scaling. By reducing early damage and increasing spawn complexity instead, Hard mode completion rates improved, allowing more players to experience the full game. Menu navigation was simplified by making the Settings option directly accessible from the pause menu. Finally, UI font sizes were increased to a minimum of 18pt with responsive scaling, ensuring all testers found the text readable and making the game more accessible for players.
+| Name | Positive | Negative | Implication |
+|------|----------|----------|-------------|
+| Barry | The controls felt smooth and it was easy to understand how to move and attack. | Hard mode became too difficult too quickly, especially when several enemies appeared at once. | The early waves on Hard mode needed to be balanced so the game stayed challenging without feeling unfair. |
+| Chris | The upgrade system was fun because earning gold gave me something to work towards after each wave. | Some upgrades felt much stronger than others, so I kept choosing damage instead of defence. | Upgrade values needed adjustment so every upgrade choice felt useful and worth buying. |
+| Miles | The game worked well as a short break because I could start playing quickly without a long tutorial. | After several waves, the gameplay started to feel a bit repetitive. | Future versions could include more enemy types, power-ups, or boss waves to add variety. |
+
+Throughout testing, several key issues were identified and resolved to improve gameplay, accessibility, and user experience. The highest-priority issue was difficulty balancing, where Hard mode had no one make it past round 5 due to early enemy damage scaling. By reducing early damage and increasing spawns instead, Hard mode completion rates improved, allowing more players to experience the full game. Menu navigation was simplified by making the Settings option directly accessible from the pause menu. Finally, UI font sizes were increased to a minimum of 18pt with responsive scaling, ensuring all testers found the text readable and making the game more accessible for players.
 
 ## 6.2 Secure Software Design and Data Handling
 
@@ -1016,12 +1050,218 @@ I overcame this by adding null checks, checking Inspector references, and testin
 
 ## Appendix A: Full Gantt Chart
 
+![Gantt Chart](Photos\GanttChart.png)
+
 ## Appendix B: Complete Data Dictionary
 
+| Data Element | Type | Size | Description | Constraints | Example |
+|------------|------|------|-------------|-------------|---------|
+| **playerHealth** | Float | 4 bytes | Current player health points | 0 ≤ value ≤ maxHealth | 75.5 |
+| **playerMaxHealth** | Float | 4 bytes | Maximum health player can have | 100 or higher | 120 |
+| **currentGold** | Integer | 4 bytes | Amount of currency player has | ≥ 0 | 1250 |
+| **playerPosition** | Vector3 | 12 bytes | Player world position (X, Y, Z) | Z must be 0 | (5.2, -3.1, 0) |
+| **moveDirection** | Vector2 | 8 bytes | Normalized direction of movement | -1 to 1 for each axis | (0.707, 0.707) |
+| **attackDamage** | Float | 4 bytes | Base damage dealt per attack | 25 or higher | 35.0 |
+| **currentWave** | Integer | 4 bytes | Current wave number | ≥ 1 | 5 |
+| **enemyCount** | Integer | 4 bytes | Enemies spawned in current wave | ≥ 0 | 15 |
+| **attackCooldown** | Float | 4 bytes | Seconds between attacks | 0.1 or higher | 0.45 |
+| **difficultyLevel** | Enum | 1 byte | Difficulty setting | Easy/Normal/Hard | Normal |
+| **damageUpgradeLevel** | Integer | 4 bytes | Number of damage upgrades purchased | ≥ 0 | 3 |
+| **isPaused** | Boolean | 1 byte | Whether game is paused | True/False | True |
+| **isAttacking** | Boolean | 1 byte | Whether player mid-attack | True/False | False |
+| **spawnRate** | Float | 4 bytes | Enemies per second during spawn | 0 or higher | 2.5 |
+
 ## Appendix C: Full Test Logs
+Test Logs for one quick run of the game. 
 
-## Appendix D: Raw Feedback Notes
+```
+Mono path[0] = 'C:/Users/Yyoung/OneDrive/Documents/GitHub/A survival game/Builds/A survival game_Data/Managed'
+Mono config path = 'C:/Users/Yyoung/OneDrive/Documents/GitHub/A survival game/Builds/MonoBleedingEdge/etc'
+Input System module state changed to: Initialized.
+[Physics::Module] Initialized fallback backend.
+[Physics::Module] Id: 0xdecafbad
+Initialize engine version: 6000.3.10f1 (e35f0c77bd8e)
+[Subsystems] Discovering subsystems at path C:/Users/Yyoung/OneDrive/Documents/GitHub/A survival game/Builds/A survival game_Data/UnitySubsystems
+[D3D12 Device Filter] Vendor Name: NVIDIA
+[D3D12 Device Filter] Device Name: NVIDIA GeForce RTX 5070
+[D3D12 Device Filter] Driver Version: 32.0.16.1062
+[D3D12 Device Filter] Feature Level: 12.2
+[D3D12 Device Filter] Graphics Memory: 11943 MB
+[D3D12 Device Filter] Processor Count: 12
+[D3D12 Device Filter] Device Type: Discrete
+GfxDevice: creating device client; kGfxThreadingModeSplitJobs
+d3d12: failed to query info queue interface (0x80004002).
+Direct3D:
+    Version:         Direct3D 12 [level 12.2]
+    Renderer:        NVIDIA GeForce RTX 5070 (ID=0x2f04)
+    Vendor:          NVIDIA
+    VRAM:            11943 MB
+    App VRAM Budget: 11175 MB
+    Driver:          32.0.16.1062
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  1.990 seconds
+- Finished resetting the current domain, in  0.002 seconds
+[Physics::Module] Selected backend.
+[Physics::Module] Name: PhysX
+[Physics::Module] Id: 0xf2b8ea05
+[Physics::Module] SDK Version: 4.1.2
+[Physics::Module] Integration Version: 1.0.0
+[Physics::Module] Threading Mode: Multi-Threaded
+<RI> Initializing input.
+Using Windows.Gaming.Input
+<RI> Input initialized.
+UnloadTime: 3.131900 ms
+LoginController Start() called
+UIDocument component not found on this GameObject!
+Created directory: C:\Users\Yyoung\OneDrive\Documents\GitHub\A survival game\Builds\A survival game_Data\LoginDetails
+No database file found. Created new database at C:/Users/Yyoung/OneDrive/Documents/GitHub/A survival game/Builds/A survival game_Data\LoginDetails\players.json
+PlayerManager initialized. Database path: C:/Users/Yyoung/OneDrive/Documents/GitHub/A survival game/Builds/A survival game_Data\LoginDetails\players.json
+LoginController Start() called
+Root element found. Querying child elements...
+LoginPlayerNameField: FOUND
+LoginPasswordField: FOUND
+LoginButton: FOUND
+CreateNewButton: FOUND
+CreatePlayerNameField: FOUND
+CreatePasswordField: FOUND
+ConfirmPasswordField: FOUND
+CreateButton: FOUND
+BackButton: FOUND
+ErrorMessage: FOUND
+LoginPanel: FOUND
+CreatePanel: FOUND
+LoginButton callback registered
+CreateNewButton callback registered
+CreateButton callback registered
+BackButton callback registered
+LoginController initialization complete!
+OnLoginClick called
+Login attempt with name: 'TestPlayer'
+Player 'TestPlayer' does not exist
+Error shown: Incorrect player name or password
+OnLoginClick called
+Login attempt with name: 'TestPlayer'
+Player 'TestPlayer' does not exist
+Error shown: Incorrect player name or password
+OnCreateNewClick called
+OnCreateClick called
+Create attempt with name: 'TestPlayer'
+Database saved to C:/Users/Yyoung/OneDrive/Documents/GitHub/A survival game/Builds/A survival game_Data\LoginDetails\players.json
+New player created: TestPlayer
+Player created: TestPlayer
+Successfully logged in as: TestPlayer
+Loading GameScene...
+Unloading 6 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 4.673900 ms
+Settings closed
+Unloading 3 unused Assets to reduce memory usage. Loaded Objects now: 2942.
+Total: 3.193000 ms (FindLiveObjects: 0.204500 ms CreateObjectMapping: 0.024200 ms MarkObjects: 2.955100 ms  DeleteObjects: 0.009000 ms)
 
+Play button clicked!
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 2.209200 ms
+Game resumed
+Settings closed
+Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 3270.
+Total: 2.953900 ms (FindLiveObjects: 0.103300 ms CreateObjectMapping: 0.026900 ms MarkObjects: 2.809300 ms  DeleteObjects: 0.014200 ms)
+
+Game resumed
+Upgrade menu closed - Game resumed
+Next wave in 10 seconds...
+Stats Updated - Damage: 25, Attack Speed: 0.5s, Speed: 5, Defense: 0%, Max Health: 100, Coin Mult: 1x
+Player attacking!
+Player attacking!
+Player attacking!
+Player attacking!
+Player attacking!
+Player attacking!
+Game paused
+Pause menu opened
+Game resumed
+Game resumed
+Game paused
+Pause menu opened
+Game resumed
+Game resumed
+Game paused
+Pause menu opened
+Game resumed
+Game resumed
+Game paused
+Pause menu opened
+Game resumed
+Game resumed
+Game paused
+Pause menu opened
+Game resumed
+Game resumed
+Player attacking!
+Game paused
+Pause menu opened
+Game paused
+Settings opened
+Game resumed
+Settings closed
+Game paused
+Pause menu opened
+Game resumed
+Game resumed
+Player attacking!
+Player attacking!
+Game paused
+Pause menu opened
+Game resumed
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 18.522800 ms
+Settings closed
+Unloading 230 unused Assets to reduce memory usage. Loaded Objects now: 2983.
+Total: 3.022600 ms (FindLiveObjects: 0.110900 ms CreateObjectMapping: 0.026100 ms MarkObjects: 2.515000 ms  DeleteObjects: 0.370500 ms)
+
+Play button clicked!
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.251200 ms
+Game resumed
+Settings closed
+Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 3278.
+Total: 2.878300 ms (FindLiveObjects: 0.109600 ms CreateObjectMapping: 0.042300 ms MarkObjects: 2.710600 ms  DeleteObjects: 0.015700 ms)
+
+Game resumed
+Upgrade menu closed - Game resumed
+Next wave in 10 seconds...
+Stats Updated - Damage: 25, Attack Speed: 0.5s, Speed: 5, Defense: 0%, Max Health: 100, Coin Mult: 1x
+Game paused
+Pause menu opened
+Player attacking!
+Game resumed
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+Game resumed
+Game resumed
+UnloadTime: 14.729000 ms
+Settings closed
+Unloading 230 unused Assets to reduce memory usage. Loaded Objects now: 2983.
+Total: 3.012600 ms (FindLiveObjects: 0.111800 ms CreateObjectMapping: 0.027600 ms MarkObjects: 2.621200 ms  DeleteObjects: 0.251800 ms)
+
+Play button clicked!
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.339600 ms
+Game resumed
+Settings closed
+Unloading 2 unused Assets to reduce memory usage. Loaded Objects now: 3278.
+Total: 3.627500 ms (FindLiveObjects: 0.129000 ms CreateObjectMapping: 0.095300 ms MarkObjects: 3.385400 ms  DeleteObjects: 0.017500 ms)
+
+Game resumed
+Upgrade menu closed - Game resumed
+Next wave in 10 seconds...
+Stats Updated - Damage: 25, Attack Speed: 0.5s, Speed: 5, Defense: 0%, Max Health: 100, Coin Mult: 1x
+Game resumed
+Game resumed
+[Physics::Module] Cleanup current backend.
+[Physics::Module] Id: 0xf2b8ea05
+Input System module state changed to: ShutdownInProgress.
+Input System polling thread exited.
+Input System module state changed to: Shutdown.
+GarbageCollector disposing of ComputeBuffer. Please use ComputeBuffer.Release() or .Dispose() to manually release the buffer.
+```
 ## Appendix E: Code Snippets
 
 ### Example 1: Event System
