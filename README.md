@@ -2,9 +2,9 @@
 ---
 
 ## How to Run
-###Run a built executable
+### Run a built executable
 
-If you've downloaded the build folder (AlphaTestv1.1):
+If you've downloaded the build folder (Assets/Builds/AlphaTestv1.1):
 
 1. Extract the build folder.
 2. Run the `.exe`.
